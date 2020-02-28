@@ -17,7 +17,9 @@ public class ContinuationHandler_AC {
     public static  Object startRequestURL() {
         Continuation con = new Continuation(90);
         con.continuationMethod='processResponse';
+        //karthik shettyan 
         //con.state='Continuation State';
+        System.debug(con.continuationMethod);
         
         HttpRequest req1 = new HttpRequest();
         HttpResponse response1 = new HttpResponse();
