@@ -1,0 +1,7 @@
+<apex:page controller="echosign_dev1.ManageAgreementsController" title="Manage Agreements" action="{!onInit}">
+	<apex:includeScript value="{!$Resource.echosign_dev1__walkmeimpt}"/>
+	
+	<apex:pagemessages id="theMessages"/>
+	
+    <iframe src="{!manageAgreementsUrl}" width="100%" height="1050px" frameborder="0" sandbox="allow-scripts allow-forms allow-pointer-lock allow-popups allow-same-origin" />
+</apex:page>

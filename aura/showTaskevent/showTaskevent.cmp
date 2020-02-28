@@ -1,0 +1,109 @@
+<aura:component controller="showTaskeventController">
+    <aura:attribute name='wrapperObj' type='TaskEventWrapper[]'></aura:attribute>
+    
+    <div class="slds-m-around--large">
+        <!--PART 1 for create toggle switch/checkbox form element -->   
+        <div class="slds-form-element">
+            <label class="slds-checkbox_toggle slds-grid">
+                <span class="slds-form-element__label slds-m-bottom_none">Toggle Info</span>
+                Tasks<ui:inputCheckbox aura:id='check' name='task' change="{!c.selectChange}"  />
+                <span id="toggle-desc" class="slds-checkbox_faux_container" aria-live="assertive">
+                    <span class="slds-checkbox_faux"></span>
+                    <span class="slds-checkbox_on">Show</span>
+                    <span class="slds-checkbox_off">Hide</span>
+                </span>
+            </label>
+        </div>
+        
+        
+        
+         <div class="slds-form-element">
+            <label class="slds-checkbox_toggle slds-grid">
+                <span class="slds-form-element__label slds-m-bottom_none">Toggle Info</span>
+                Events<ui:inputCheckbox aura:id='event' name='event' change="{!c.selectChange}"  />
+                <span id="toggle-desc" class="slds-checkbox_faux_container" aria-live="assertive">
+                    <span class="slds-checkbox_faux"></span>
+                    <span class="slds-checkbox_on">Show</span>
+                    <span class="slds-checkbox_off">Hide</span>
+                </span>
+            </label>
+        </div>
+        
+        
+           <div class="slds-form-element">
+            <label class="slds-checkbox_toggle slds-grid">
+                <span class="slds-form-element__label slds-m-bottom_none">Toggle Info</span>
+                Note<ui:inputCheckbox aura:id='note' name='note' change="{!c.selectChange}"  />
+                <span id="toggle-desc" class="slds-checkbox_faux_container" aria-live="assertive">
+                    <span class="slds-checkbox_faux"></span>
+                    <span class="slds-checkbox_on">Show</span>
+                    <span class="slds-checkbox_off">Hide</span>
+                </span>
+            </label>
+        </div>
+        
+            <div class="slds-form-element">
+            <label class="slds-checkbox_toggle slds-grid">
+                <span class="slds-form-element__label slds-m-bottom_none">Toggle Info</span>
+                Email<ui:inputCheckbox aura:id='email' name='email' change="{!c.selectChange}"  />
+                <span id="toggle-desc" class="slds-checkbox_faux_container" aria-live="assertive">
+                    <span class="slds-checkbox_faux"></span>
+                    <span class="slds-checkbox_on">Show</span>
+                    <span class="slds-checkbox_off">Hide</span>
+                </span>
+            </label>
+        </div>
+        
+        
+        
+        <lightning:select name="selectItem" label="Select an item" aura:id="select" onchange="{!c.selectChange}">
+            <option value="">Click any thing</option>
+            <option value="Account">Account</option>
+            <option value="Contact">Contact</option>
+            <option value="Opportunity">Opportunity</option>
+        </lightning:select>
+        
+        
+        
+        <!--PART 2 : create a Div with slds-hide class, control by toggle checkbox-->        
+        
+        
+
+            <aura:iteration items='{!v.wrapperObj}' var='wrapperObjList'>
+                <H1>TASKS</H1>
+                
+               
+ 
+                <aura:iteration items='{!wrapperObjList.taskList}' var='task'>
+                    <br/>{!task.Id}
+                </aura:iteration> 
+                
+                <aura:iteration items='{!wrapperObjList.eventList}' var='event'>
+                    <br/>{!event.Id}
+                </aura:iteration> 
+                
+                <aura:iteration items='{!wrapperObjList.noteList}' var='note'>
+                    <br/>{!note.Id}
+                </aura:iteration> 
+                
+                 <aura:iteration items='{!wrapperObjList.emailList}' var='email'>
+                    <br/>{!email.Id}
+                   
+                </aura:iteration>   
+                 
+               
+                
+                
+               
+               
+        
+
+            </aura:iteration>  
+            
+          </div>     
+   
+            
+            
+    
+
+</aura:component>

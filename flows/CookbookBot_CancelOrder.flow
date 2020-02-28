@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <assignments>
+        <name>Send_Success_Message</name>
+        <label>Response</label>
+        <locationX>132</locationX>
+        <locationY>397</locationY>
+        <assignmentItems>
+            <assignToReference>Message</assignToReference>
+            <operator>Assign</operator>
+        </assignmentItems>
+    </assignments>
+    <interviewLabel>CookbookBot CancelOrder {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>CookbookBot CancelOrder</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>CancelOrder</name>
+        <label>Cancel Order</label>
+        <locationX>137</locationX>
+        <locationY>223</locationY>
+        <connector>
+            <targetReference>Send_Success_Message</targetReference>
+        </connector>
+        <filters>
+            <field>Name</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>OrderNumber</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Status__c</field>
+            <value>
+                <stringValue>Canceled</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Bot_Order__c</object>
+    </recordUpdates>
+    <startElementReference>CancelOrder</startElementReference>
+    <status>Active</status>
+    <variables>
+        <name>Message</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+        <value>
+            <stringValue>Your order has been cancelled</stringValue>
+        </value>
+    </variables>
+    <variables>
+        <name>OrderNumber</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

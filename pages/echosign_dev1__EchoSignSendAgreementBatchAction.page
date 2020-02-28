@@ -1,0 +1,51 @@
+<apex:page standardController="echosign_dev1__SIGN_Agreement__c" 
+           extensions="echosign_dev1.EchoSignActionListController"
+           recordSetVar="agreements" >
+
+    <apex:sectionHeader title="{!$Label.echosign_dev1__bulk_action_send_page_title}"/>
+    <apex:outputPanel rendered="{!isSuccess}">
+        <div class="message infoM3" role="alert">
+            <table border="0" cellpadding="0" cellspacing="0" class="messageTable" style="padding:0px; margin:0px;">
+                <tbody><tr valign="top">
+                    <td>
+                        <img alt="INFO" class="msgIcon" src="/s.gif" title="INFO"/>
+                    </td>
+                    <td class="messageCell">
+                        <div class="messageText">
+                            <span style="font-size: small;">{!$Label.Bulk_Action_Result_Label} <a style="font-size: 100%; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;" href="/apexpages/setup/listAsyncApexJobs.apexp">{!syncProcessId}</a>. {!$Label.Bulk_Action_Result_Label_Two} <a style="font-size: 100%; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;" href="{!URLFOR($Action.SIGN_Agreement__c.Tab,$ObjectType.SIGN_Agreement__c)}">{!$Label.Bulk_Action_Result_Label_Three}</a> {!$Label.Bulk_Action_Result_Label_Four}</span>
+                            <br/>
+                        </div>
+                    </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody></table>
+        </div>
+    </apex:outputPanel>
+    
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageMessages />
+            <apex:pageBlockButtons >
+                 <apex:commandLink action="{!onLoad}" onclick="if(Object.keys('{!selected}').length == 0 ){alert('{!JSENCODE($Label.echosign_dev1__bulk_action_no_records_selected_message)}'); return false;} else if(!confirm('{!JSENCODE($Label.echosign_dev1__bulk_action_send_confirm_prompt)}')){return false;} self.close();">
+                    <apex:param name="actionType" value="Send" assignTo="{!actionType}"/>
+                    <apex:commandButton id="submit" value="{!$Label.echosign_dev1__submit_button_label}" disabled="{!isSuccess}"/>
+                </apex:commandLink>
+                <apex:commandLink action="{!cancel}">
+                    <apex:commandButton value="{!$Label.echosign_dev1__cancel_button_label}" disabled="{!isSuccess}"/>
+                </apex:commandLink>
+            </apex:pageBlockButtons>  
+            <apex:pageBlockSection title="{!$Label.echosign_dev1__batch_selected_list_label}" columns="1">
+                <apex:pageBlockTable value="{!selected}" var="agreement">
+                    <apex:column value="{!agreement.name}"/>
+                    <apex:column value="{!agreement.CreatedById}"/>
+                    <apex:column value="{!agreement.CreatedDate}"/>
+                    <apex:column value="{!agreement.LastModifiedById}"/>
+                    <apex:column value="{!agreement.LastModifiedDate}"/>
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

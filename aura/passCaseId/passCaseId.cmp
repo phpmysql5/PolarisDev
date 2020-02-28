@@ -1,0 +1,6 @@
+<aura:component implements="flexipage:availableForAllPageTypes,force:lightningQuickActionWithoutHeader,force:hasRecordId">
+    
+    
+     <c:closeCaseFunctionality recordId="{!v.recordId}"/>
+	
+</aura:component>

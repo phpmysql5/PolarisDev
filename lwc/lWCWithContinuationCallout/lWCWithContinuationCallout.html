@@ -1,0 +1,162 @@
+<template>
+    <lightning-card title="Lightning Web Component With Continuation">
+        <center>
+            <lightning-button variant="success" icon-name="utility:apex_plugin" label="Make A Callout"
+                title="Base action" onclick={startRequestURL}>
+            </lightning-button>
+        </center>
+        <br /><br />
+        <template if:true={loaded}>
+            <lightning-spinner alternative-text="Loading" size="large" variant="brand"></lightning-spinner>
+        </template>
+        <template if:true={studentList}>
+            <lightning-card>
+                <center>
+                    <h2 slot="title">
+                        <lightning-icon icon-name="utility:connected_apps" size="small"></lightning-icon>
+                        Student List
+                    </h2>
+                </center><br />
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+                    <thead>
+                        <tr class="slds-text-title_caps">
+                            <th scope="col">
+                                <div class="slds-truncate" title="Name">Name</div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate" title="Email">Email</div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate" title="AccNumber">AccNumber</div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate" title="Source">Source</div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate" title="Site">Site</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={studentList} for:item="row">
+                            <tr key={row}>
+                                <td>
+                                    <div class="slds-truncate" title={row.Name}>
+                                        {row.Name}
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="slds-truncate" title={row.Email}>
+                                        {row.Email}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="slds-truncate" title={row.AccNumber}>
+                                        {row.AccNumber}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="slds-truncate" title={row.Source}>
+                                        {row.Source}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="slds-truncate" title={row.Site}>
+                                        {row.Site}
+                                    </div>
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </lightning-card>
+        </template>
+        <br /><br />
+        <template if:true={candidateList}>
+            <lightning-card>
+                <center>
+                    <h2 slot="title">
+                        <lightning-icon icon-name="utility:connected_apps" size="small"></lightning-icon>
+                        Candidate List
+                    </h2>
+                </center><br />
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+                    <thead>
+                        <tr class="slds-text-title_caps">
+                            <th scope="col">
+                                <div class="slds-truncate" title="Name">Name</div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate" title="Country">Country</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={candidateList} for:item="row">
+                            <tr key={row}>
+                                <td>
+                                    <div class="slds-truncate" title={row.Name}>
+                                        {row.Name}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="slds-truncate" title={row.Country}>
+                                        {row.Country}
+                                    </div>
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </lightning-card>
+        </template>
+        <br /><br />
+        <template if:true={candidateList}>
+            <lightning-card>
+                <center>
+                    <h2 slot="title">
+                        <lightning-icon icon-name="utility:connected_apps" size="small"></lightning-icon>
+                        Customer List
+                    </h2>
+                </center><br />
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+                    <thead>
+                        <tr class="slds-text-title_caps">
+                            <th scope="col">
+                                <div class="slds-truncate" title="Name">Name</div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate" title="Country">Country</div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate" title="City">City</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={customerList} for:item="row">
+                            <tr key={row}>
+                                <td>
+                                    <div class="slds-truncate" title={row.Name}>
+                                        {row.Name}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="slds-truncate" title={row.Country}>
+                                        {row.Country}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="slds-truncate" title={row.City}>
+                                        {row.City}
+                                    </div>
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </lightning-card>
+        </template>
+    </lightning-card>
+</template>

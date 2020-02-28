@@ -1,0 +1,17 @@
+<apex:page > <apex:form >  {!$User.FirstName}<br/>
+  {!$User.LastName}<br/>
+  {!$User.Email} <br/>
+  {!$User.Phone}<br/>
+  {!$User.Title}<br/>
+ 
+  
+
+ </apex:form>
+ 
+
+ </apex:page>
+  <!-- Begin Default Content REMOVE THIS -->
+ 
+  
+  
+  <!-- End Default Content REMOVE THIS -->

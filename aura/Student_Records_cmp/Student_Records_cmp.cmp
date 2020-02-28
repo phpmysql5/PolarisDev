@@ -1,0 +1,27 @@
+<aura:component controller="RecordController" implements="force:appHostable" >
+    
+    <aura:attribute name="FirstName" 	type="String"  />
+    <aura:attribute name="MiddleName" 	type="String"  />
+    <aura:attribute name="LastName" 	type="String"  />
+    
+     <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+     <aura:attribute name="records" type="List_of_Students__c[]"/>   
+    
+
+        <!-- Use the Apex model and controller to fetch server side data -->
+        <aura:iteration items="{!v.records}" var="record">
+            
+            <p>
+                {!record.Id } &nbsp;{!record.Name__c }&nbsp;{!record.Middle_Name__c }&nbsp;{!record.Last_Name__c } 
+            </p>
+        </aura:iteration>
+           
+       
+
+  
+
+    
+    
+	
+</aura:component>

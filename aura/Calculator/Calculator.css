@@ -1,0 +1,13 @@
+.THIS 
+{
+    
+}
+
+.THIS .myWidth
+{
+    width :100px;
+}
+.THIS.myBorder
+{
+    border:5px Red Solid;
+}

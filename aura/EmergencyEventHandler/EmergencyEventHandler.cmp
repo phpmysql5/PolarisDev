@@ -1,0 +1,9 @@
+<aura:component >
+    <!--Register for the event name is required attribute but does't play any role-->
+    <aura:registerEvent name="emergency" type="c:EmergencyEvent" />
+    
+    <!--create a button to perform user event -->
+    <lightning:button label="Dial emergency" onclick="{!c.dial911}" />
+    
+	
+</aura:component>

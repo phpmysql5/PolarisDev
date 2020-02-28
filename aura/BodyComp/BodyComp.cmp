@@ -1,0 +1,4 @@
+<aura:component >
+	
+   this is a body{!v.body}
+</aura:component>

@@ -1,0 +1,75 @@
+<aura:component controller="showEmployeeRecords"
+                implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global">
+ 
+    <!--<ltng:require styles="{!$Resource.SLDS203 + '/assets/styles/lightning-design-system-ltng.css'}"/>-->
+
+    <aura:attribute name="RecentEmp" type="Employee2__c"  />
+    <aura:attribute name="showAllrecords" type="Employee2__c[]"/>
+    <aura:attribute name="edittheRecord" type="Employee2__c"/>
+    
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/> 
+   <!-- <aura:handler event="force:refreshView" action="{!c.doInit}" /> -->
+    
+
+    
+  <div class="slds-grid slds-table slds-table--bordered">
+        <ui:inputCheckbox aura:id="checkbox2" label="IsExperienced?"   name="checkbox" />
+     <!-- <lightning:input aura:id="checkbox2" type="checkbox" label="IsExperienced?" checked ="false" name="checkbox123"  />-->
+    <lightning:input aura:id="FirstName" name="FirstName"  label="First name" placeholder="Write First name"  />
+    <lightning:input aura:id="LastName"  name="LastName" label="Last name" placeholder="Write Last name" required="true" />
+    <lightning:input aura:id="Age"       name="Age" type="number" placeholder="Write Age"  label="Age" required="true"/>
+    
+    
+</div>
+    
+    <lightning:button label="Submit" onclick="{!c.onclick }" />
+    
+    <aura:renderIf isTrue="{!v.RecentEmp}">
+    
+    New Record inserted
+      
+    <aura:set attribute="else">
+      New Record not inserted
+    </aura:set>
+  </aura:renderIf>
+    
+  
+        <br/>
+        <br/>
+   
+        
+         <table class="slds-table slds-table--bordered" border="1" >
+            <tr class="slds-text-heading--label">
+                
+                     <th scope="row">First Name</th>
+                  
+                      <th scope="row">Second Name</th>
+                 
+                          <th scope="row">Age</th>
+                          
+             <th scope="row">Experience</th>
+               
+			</tr>
+              
+             <aura:iteration items="{!v.showAllrecords}" var="all" indexVar="indx">
+             <tr class="slds-text-heading--label">
+                 <td>{!all.FirstName__c}</td> 
+    			 <td>{!all.LastName__c}</td>
+   				 <td>{!all.AGE__c}</td> 
+   		 		 <td>{!all.Experienced__c}</td>
+                 <lightning:button aura:id="button" label='{!indx}' onclick="{!c.onEdit }" value="{!all.Id}"  />
+              </tr>
+                 
+             </aura:iteration>
+        </table>
+   
+    
+    
+    
+    
+    
+   
+
+    
+</aura:component>

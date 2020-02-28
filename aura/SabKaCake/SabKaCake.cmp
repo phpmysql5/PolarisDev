@@ -1,0 +1,17 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+  <div class="slds-box slds-theme_default" >
+        <lightning:tabset variant="vertical">
+        <lightning:tab label="Send Invitation">
+            <lightning:layoutItem flexibility="auto" padding="around-small">
+        <c:SampleDragDrop></c:SampleDragDrop>
+            </lightning:layoutItem>
+        </lightning:tab>
+        <lightning:tab label="Add Payments">
+           <c:insertPaidAmount></c:insertPaidAmount>
+        </lightning:tab>
+        <lightning:tab label="Colleagues Record Form">
+            <c:createColleague></c:createColleague>
+        </lightning:tab>
+    </lightning:tabset>
+    </div>
+</aura:component>

@@ -1,0 +1,29 @@
+<apex:page standardController="echosign_dev1__SIGN_Agreement__c" 
+    sidebar="false" 
+    showHeader="false">
+    <apex:includeScript value="/lightning/lightning.out.js" />
+    
+    <apex:includeLightning />
+    
+    <apex:variable var="recordId" value="{! IF( NOT ISNULL( $CurrentPage.parameters.recordId), $CurrentPage.parameters.recordId, '' ) }"/>
+    <apex:variable var="recordFieldName" value="{! IF( NOT ISNULL( $CurrentPage.parameters.recordFieldName), $CurrentPage.parameters.recordFieldName, '' ) }"/>
+
+    <div id="lightning" style="height: 600px;" />
+
+    <script>
+    	var isLightning = (typeof sforce != 'undefined') && (sforce != null) && (sforce.one != null);
+    	var appName = "echosign_dev1:AgreementRelatedListBridge";
+        
+    	var recordId = '{! recordId }' == '' ? null : '{! recordId }';
+    	var recordFieldName = '{! recordFieldName }' == '' ? null : '{! recordFieldName }';
+        
+    	$Lightning.use(appName, function() {
+        	$Lightning.createComponent("echosign_dev1:AgreementList",
+          		{ "recordId" : recordId,
+                  "recordFieldName" : recordFieldName },
+          		"lightning",
+          		function(cmp) {
+          	});
+        });
+    </script>
+</apex:page>

@@ -1,0 +1,26 @@
+<template>
+    
+<lightning-input type="toggle"   onchange={changeHandler} ></lightning-input>
+{showAccount} 
+   <template if:true={showAccount} >
+ 
+    <lightning-card  title="Hello">
+        <lightning-button label="New" slot="actions"></lightning-button>
+        <p class="slds-p-horizontal_small">Enter Account info</p>
+ 
+        <c-create-account-form2></c-create-account-form2>
+    </lightning-card>
+
+    </template>
+
+    <template if:false={showAccount} >
+
+        <lightning-card  title="Hello">
+            <lightning-button label="New" slot="actions"></lightning-button>
+            <p class="slds-p-horizontal_small">Dont Show account</p>
+          
+        </lightning-card>
+    
+    </template>
+ 
+</template>

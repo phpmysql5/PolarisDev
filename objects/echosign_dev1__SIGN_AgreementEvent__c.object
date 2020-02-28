@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <deprecated>false</deprecated>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableLicensing>false</enableLicensing>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>ControlledByParent</externalSharingModel>
+    <fields>
+        <fullName>echosign_dev1__Acting_User_Ip_Address__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Acting User IP Address</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>echosign_dev1__Date__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>echosign_dev1__Days_Ago__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>now() - CreatedDate</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Days Ago</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>5</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>echosign_dev1__Description__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Description</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>echosign_dev1__Document_Version_Key__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Document Version Key</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>echosign_dev1__Key__c</fullName>
+        <caseSensitive>true</caseSensitive>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Key</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>echosign_dev1__Recipient__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Recipient</label>
+        <referenceTo>echosign_dev1__SIGN_Recipients__c</referenceTo>
+        <relationshipLabel>Agreement Events</relationshipLabel>
+        <relationshipName>Agreement_Events</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>echosign_dev1__SIGN_Agreement__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Agreement</label>
+        <referenceTo>echosign_dev1__SIGN_Agreement__c</referenceTo>
+        <relationshipLabel>Agreement Events</relationshipLabel>
+        <relationshipName>Name</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>echosign_dev1__Type__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>IF(
+  CONTAINS( LOWER(echosign_dev1__Description__c) , &quot;sent out for signature to&quot;), 
+  &quot;SENT&quot;, 
+IF(
+  CONTAINS( LOWER(echosign_dev1__Description__c) , &quot;sent out for approval to&quot;), 
+  &quot;SENT FOR APPROVAL&quot;,
+IF(
+  CONTAINS( LOWER(echosign_dev1__Description__c) , &quot;sent out for acceptance to&quot;), 
+  &quot;SENT FOR ACCEPTANCE&quot;,
+IF(
+  CONTAINS( LOWER(echosign_dev1__Description__c) , &quot;sent out for filling to&quot;) || CONTAINS( LOWER(echosign_dev1__Description__c) , &quot;sent out for form filling to&quot;), 
+  &quot;SENT FOR FORM-FILLING&quot;,
+IF(
+  CONTAINS( LOWER(echosign_dev1__Description__c) , &quot;sent out for delivery to&quot;) || CONTAINS( LOWER(echosign_dev1__Description__c) , &quot;sent out for acknowledgement to&quot;), 
+  &quot;SENT FOR DELIVERY&quot;,
+IF(
+  CONTAINS( echosign_dev1__Description__c , &quot;signed by&quot;),
+  &quot;SIGNED&quot;,
+IF(
+  CONTAINS( echosign_dev1__Description__c , &quot;approved by&quot;),
+  &quot;APPROVED&quot;,
+IF(
+  CONTAINS( echosign_dev1__Description__c , &quot;accepted by&quot;),
+  &quot;ACCEPTED&quot;,
+IF(
+  CONTAINS( echosign_dev1__Description__c , &quot;filled by&quot;),
+  &quot;FORM-FILLED&quot;,
+IF(
+  CONTAINS( echosign_dev1__Description__c , &quot;delivered by&quot;) || CONTAINS( echosign_dev1__Description__c , &quot;acknowledged by&quot;),
+  &quot;DELIVERED&quot;,
+IF(
+  CONTAINS( echosign_dev1__Description__c , &quot;viewed by&quot;),
+  &quot;VIEWED&quot;,
+IF(
+  CONTAINS( echosign_dev1__Description__c , &quot;created by&quot;),
+  &quot;CREATED&quot;,
+IF(
+  CONTAINS( echosign_dev1__Description__c , &quot;cancelled by&quot;) || CONTAINS( echosign_dev1__Description__c , &quot;canceled by&quot;),
+  &quot;CANCELLED&quot;,
+IF(
+  CONTAINS( echosign_dev1__Description__c , &quot;declined by&quot;),
+  &quot;DECLINED&quot;,
+IF(
+  CONTAINS( echosign_dev1__Description__c , &quot;email bounced and could not be delivered to&quot; )|| CONTAINS( echosign_dev1__Description__c , &quot;Email bounced and was not delivered to&quot;),
+  &quot;BOUNCED&quot;,
+IF(
+  CONTAINS( echosign_dev1__Description__c , &quot;reminder sent to&quot;),
+  &quot;REMINDER&quot;,
+IF(
+  CONTAINS( echosign_dev1__Description__c , &quot;expired&quot;),
+  &quot;EXPIRED&quot;,
+&quot;OTHER&quot;)))))))))))))))))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Type</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Agreement Event</label>
+    <listViews>
+        <fullName>echosign_dev1__All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>E{000000}</displayFormat>
+        <label>Event Number</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Agreement Events</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>echosign_dev1__Date__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>echosign_dev1__Description__c</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>echosign_dev1__Date__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>echosign_dev1__Description__c</lookupDialogsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ControlledByParent</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

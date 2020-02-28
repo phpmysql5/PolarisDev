@@ -1,0 +1,27 @@
+<!-- <apex:page controller="EchoSignAdminController" title="eSign Services Admin">
+	<apex:includeScript value="{!$Resource.walkmeimpt}"/>
+	
+	<iframe src="/apex/EchoSignAdminSettings" width="100%" height="1050px" frameborder="0" />
+</apex:page> -->
+
+<apex:page sidebar="{! IF( NOT ISNULL( $CurrentPage.parameters.showheadersidebar), $CurrentPage.parameters.showheadersidebar, 'true' ) }" 
+    showHeader="{! IF( NOT ISNULL( $CurrentPage.parameters.showheadersidebar), $CurrentPage.parameters.showheadersidebar, 'true' ) }">
+    <apex:includeScript value="/lightning/lightning.out.js" />
+    
+    <apex:includeLightning />
+    
+    <div id="lightning" />
+
+    <script>
+    	var isLightning = (typeof sforce != 'undefined') && (sforce != null) && (sforce.one != null);
+    	var appName = "echosign_dev1:DocumentCloudAdminBridge";
+
+    	$Lightning.use(appName, function() {
+        	$Lightning.createComponent("echosign_dev1:DocumentCloudAdmin",
+          		{ },
+          		"lightning",
+          		function(cmp) {
+          	});
+        });
+    </script>
+</apex:page>

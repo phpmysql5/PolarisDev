@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MlDomain xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>CookbookBot Intents</label>
+    <mlIntents>
+        <developerName>Main_Menu2</developerName>
+        <label>Main Menu</label>
+        <mlIntentUtterances>
+            <utterance>main menu</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>main menu</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>main menu</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>main menu</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>main menu</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>main menu</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>main menu</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>main menu</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>main menu</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>main menu</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>main menu</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>main menu</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>main menu</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>main menu</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>main menu</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>main menu</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>main menu</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>main menu</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>main menu</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>main menu</utterance>
+        </mlIntentUtterances>
+    </mlIntents>
+    <mlIntents>
+        <developerName>Order_Status</developerName>
+        <label>Order Status</label>
+        <mlIntentUtterances>
+            <utterance>When will my order will come ?</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>I did not receive my order</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>I have not received my order</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>When can I expect my order ?</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>Why I have not received my order when my due date was yesterday?</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>The due date was yesterday but still my order is pending</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>My order was due yesterday ,but still I have not received</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>When I will get my order ?</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>Where is my package ?</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>I am still waiting for my order</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>My order is pending</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>I am waiting for my order</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>When is the date on which I will recieve my order ?</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>I have placed my order  many days ago</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>what is my order status?</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>Not received the package</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>Where is my order?</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>Still waiting for my order</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>My order was due</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>still order pending</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>still not got the package</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>not got the package</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>not recieved the package</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>order not got</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>pending order</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>order not recieved</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>order still pending</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>not have got my order</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>why the order is still not delivered</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>where the hell is my order</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>where is the order</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>My order?</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>status of order</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>where is the order</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>where is the order man</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>hey man ...the order was due</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>still waiting for order</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>why the order has not been delivered</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>order has not been delivered</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>delivery status of order</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>my order?</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>paackage not delivered</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>package still not got</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>order pending order</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>late order?</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>order pending</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>order not delivered</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>late order</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>order pending</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>not got my order</utterance>
+        </mlIntentUtterances>
+    </mlIntents>
+    <mlIntents>
+        <developerName>testintent</developerName>
+        <label>testintent</label>
+        <mlIntentUtterances>
+            <utterance>test</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>test</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>test</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>test</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>test</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>test</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>test</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>test</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>test</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>test</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>test</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>test</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>test</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>test</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>test</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>test</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>test</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>test</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>test</utterance>
+        </mlIntentUtterances>
+        <mlIntentUtterances>
+            <utterance>test</utterance>
+        </mlIntentUtterances>
+    </mlIntents>
+</MlDomain>

@@ -1,0 +1,8 @@
+<aura:component >
+    <lightning:button label='b1' variant='brand'   aura:id='1' onclick='{!c.handleClick}' />
+    <lightning:button label='b2' variant='neutral' aura:id='2' onclick='{!c.handleClick}' />
+    <lightning:button label='b3' variant='neutral' aura:id='3' onclick='{!c.handleClick}' />
+    <lightning:button label='b4' variant='neutral' aura:id='4' onclick='{!c.handleClick}' />
+    
+	
+</aura:component>

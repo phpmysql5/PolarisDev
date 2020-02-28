@@ -1,0 +1,17 @@
+<aura:component controller="ContactController" access="global" implements="force:appHostable">
+    <aura:attribute name="contacts" type="contact[]"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:handler event="c:SearchKeyChange" action="{!c.searchKeyChange}"/>
+    
+    <aura:iteration items="{!v.contacts}" var="contact">
+     <a href="{! '#contact/'+ contact.Id }">
+                    <p>{!contact.Name}</p>
+                    <p>{!contact.Phone}</p>
+
+     </a>
+    
+    </aura:iteration>
+    
+    
+	
+</aura:component>

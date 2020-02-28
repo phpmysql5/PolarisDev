@@ -1,0 +1,7 @@
+<apex:page showHeader="false" sidebar="false" controller="echosign_dev1.SignedAgreementDocLinkController" action="{!doInit}">
+	<script type="text/javascript">
+		window.location.href = '{!documentUrl}';
+
+		setTimeout(function(){ window.close(); }, 2000);
+	</script>
+</apex:page>

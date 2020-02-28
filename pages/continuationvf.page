@@ -1,0 +1,9 @@
+<apex:page controller="ContinuationHandler_AC" showChat="false" showHeader="false">
+   <apex:form >
+      <!-- Invokes the action method when the user clicks this button. -->
+      <apex:commandButton action="{!startRequestURL}" 
+              value="Start Request" reRender="result"/> 
+   </apex:form>
+   <!-- This output text component displays the callout response body. -->
+   <apex:outputText id="result" value="{result}" />
+</apex:page>

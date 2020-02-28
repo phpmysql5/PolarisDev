@@ -1,0 +1,44 @@
+<template>
+    <style>
+         table  tr td {
+             padding: 1px solid  black;
+         }
+    </style>
+
+    <table style = "background:white">
+       <tr> 
+           <td>
+               Reactive public property 
+               <lightning-input type ='text' onchange ={handleChange1}>
+                   </lightning-input>
+
+                   <br>
+                   <b>Value ={reactivepublicproperty}</b>
+           </td>
+
+       </tr>
+       <tr>
+       <td>
+           Reactive Private property
+           <lightning-input type ='text' onchange ={handleChange2}>
+            </lightning-input>
+           
+           <br>
+           <b>Value ={reactiveprivateproperty}</b>
+            
+
+        </td>
+       </tr>
+        <tr>
+            <td>
+                Non-reactive Private Property
+                <lightning-input type ='text' onchange={handleChange3}>
+                    </lightning-input>
+                    <br>
+                    <b>Value ={nonreactiveprivateproperty}</b>
+            </td>
+        </tr>
+
+    </table>
+    
+</template>

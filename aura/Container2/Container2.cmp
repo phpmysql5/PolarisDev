@@ -1,0 +1,10 @@
+<aura:component>
+    
+  <c:lightningAvatar/>
+    <c:testAttribute/>
+       
+    
+   
+   
+      
+</aura:component>

@@ -1,0 +1,5 @@
+<apex:page showHeader="false">
+  <script type="text/javascript">
+    window.location.href = "https://helpx.adobe.com/sign/help/adobe_sign_for_salesforce_user_guide.html";
+  </script>
+</apex:page>

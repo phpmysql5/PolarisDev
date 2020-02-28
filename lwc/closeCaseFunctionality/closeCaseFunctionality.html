@@ -1,0 +1,68 @@
+<template>
+                <lightning-card
+                    title="Close Case Info"
+                    icon-name="standard:case"
+                >
+{recordId}
+
+<lightning-card title={cardTitle}
+icon-name="custom:custom85">
+<div class="slds-m-around_medium">
+    <lightning-record-edit-form object-api-name={objectName} onsuccess={handleSuccess}>
+        <lightning-messages>
+        </lightning-messages>
+        <lightning-input-field field-name="Name">
+        </lightning-input-field>
+        <lightning-input-field field-name="AccountId" value={recordId}>
+        </lightning-input-field>
+        <lightning-input-field field-name="Title">
+
+        </lightning-input-field>
+        <lightning-input-field field-name="Email" value={accountSite}>
+            </lightning-input-field>
+            <lightning-button
+                class="slds-m-top_small"
+                type="submit"
+                label="Create new">
+            </lightning-button>
+    </lightning-record-edit-form>
+</div>
+</lightning-card>
+
+
+
+
+    <lightning-record-form
+    
+    object-api-name={objectName}
+    columns="2"
+    mode="edit"
+    layout-type="Full">
+
+    <lightning-input-field field-name="AccountId" value={recordId}></lightning-input-field>
+    </lightning-record-form>
+               
+       
+              
+   
+
+                <!--
+
+                <template if:true={Case.data}>
+                        <lightning-layout vertical-align="center">
+                                <lightning-layout-item padding="around-small">
+                                        <p>Name : {status}</p>
+                                        
+                                    </lightning-layout-item>        
+                        </lightning-layout>
+                </template>
+                   -->
+            </lightning-card>
+           
+            
+     
+          
+       
+  
+    
+</template>

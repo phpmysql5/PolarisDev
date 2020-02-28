@@ -1,0 +1,22 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    
+     <aura:attribute name="fields" type="String[]" default="['Name','Phone__c','Preferred_Location__c','Primary_Skill__c','Relevant_Experience__c', 'Total_Experience__c']" />
+     <aura:attribute name="recordId" type="String"/>
+    <aura:attribute name="sObjectName" type="String" default="Consultant__c" />
+    <lightning:card iconName="custom:custom19" title="lightning:recordForm">
+        <div class="slds-p-left_large slds-p-right_medium">	
+            <lightning:recordForm aura:id="recordViewForm" 
+                                  objectApiName="{!v.sObjectName}"
+                                  fields="{!v.fields}"
+                                  
+                                  
+                                  columns="2"
+                                 
+                                  mode="edit"
+                                  onsuccess="{!c.onSuccess}"
+                                  
+                                  onerror="{!c.onError}"
+                                  />
+        </div>
+    </lightning:card>
+        </aura:component>

@@ -1,0 +1,88 @@
+<apex:page standardController="Case" tabStyle="Case" lightningStylesheets="true" id="mainPage" title="Close Case">
+
+    <!-- JQuery Plugin to -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    
+    <!-- Custom styling to make the page as per your choice-->
+    <style>
+        .slds-scope img {
+            max-width: 100%;
+            height: 100% !important;
+        }
+        body .lookupInput .lookupIcon{
+            height: auto !important;
+        } 
+        body .lookupInput .lookupIconOn:hover{
+            height: auto !important;
+        }
+        .pbButton{
+            padding-left: 15% !important;
+        }
+        .slds-spinner:before, 
+        .slds-spinner:after, 
+        .slds-spinner__dot-a:before, 
+        .slds-spinner__dot-b:before, 
+        .slds-spinner__dot-a:after, 
+        .slds-spinner__dot-b:after { 
+            background: #0794f8 !important;
+        }
+    </style>
+    <apex:slds />
+
+    <!-- Form, to have all the fields from the field set-->
+    <apex:form id="mainForm" styleClass="slds-p-around_small">
+        <apex:sectionHeader title="Close Case"/>
+        <apex:pageBlock title="Case Edit" id="mainBlock" mode="edit">
+
+            <!-- To show validation error on the page, out of the box from standard controller -->
+            <apex:pagemessages />
+
+            <!-- Sections for the close case with thier particular fieldSets -->
+            <!-- Section 1 -->
+            <apex:pageBlockSection title="Case Information" collapsible="false" columns="2" id="firstSection">
+              
+            </apex:pageBlockSection>
+
+            <!--Section 2-->
+            <apex:pageBlockSection title="Enter Your Feedback on Case Contact" collapsible="false" columns="2">
+               
+            </apex:pageBlockSection>
+
+            <!-- Standard Save and Cancel Button -->
+            <apex:pageBlockButtons location="both" >
+                <apex:commandButton action="{!Save}" title="Save" value="Save" status="status" rerender="mainForm"/>
+                <apex:commandButton action="{!Cancel}" title="Cancel" value="Cancel"/>
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+
+        <!-- To show a lightning like spinner on the page while record get saved-->
+        <apex:actionStatus id="status">
+            <apex:facet name="start">
+            <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.75; z-index: 1000; background-color: black;">
+                &nbsp;
+            </div>
+            <div style="position: fixed; left: 0; top: 0; bottom: 0; right: 0; z-index: 1001; margin: 10% 50%">
+                <div class="demo-only">
+                  <div role="status" class="slds-spinner slds-spinner_medium">
+                    <span class="slds-assistive-text">Loading</span>
+                    <div class="slds-spinner__dot-a"></div>
+                    <div class="slds-spinner__dot-b"></div>
+                  </div>
+                </div>
+            </div>
+            </apex:facet>
+        </apex:actionStatus>
+    </apex:form>
+
+    <!-- JQuery Script to show only picklist values which have 'Closed' value, hide others -->
+   <script type="text/javascript">
+       $(document).ready(function(){
+           $(".Status option").each(function(){
+               if($(this).val().toLowerCase().indexOf('closed') == -1){
+                   var optionSelector = ".Status option[value='"+ $(this).val() +"']";
+                   $(optionSelector).wrap( "<span>" );
+               }
+           });
+       });
+    </script>
+</apex:page>

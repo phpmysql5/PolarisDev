@@ -1,0 +1,15 @@
+<aura:component implements="force:appHostable" controller='dynamica' >
+    
+    
+  <aura:attribute name="account" type="configuration__c" />
+     <aura:attribute name="accountFields" type="List" />
+  <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+    <aura:iteration items='{!v.account}' var='acc'>
+       value="{!acc[0]}"/>
+
+    </aura:iteration>
+    
+    
+	
+</aura:component>

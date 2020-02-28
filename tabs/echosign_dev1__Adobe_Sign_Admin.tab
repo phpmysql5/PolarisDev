@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomTab xmlns="http://soap.sforce.com/2006/04/metadata">
+    <icon>echosign_dev1__ButtonsLogosImages/echosign_dev1__Agreement_Logo.png</icon>
+    <label>Adobe Sign Admin</label>
+    <motif>Custom283: TV Widescreen</motif>
+    <page>echosign_dev1__EchosignAdmin</page>
+</CustomTab>

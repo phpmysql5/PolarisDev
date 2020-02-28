@@ -1,0 +1,57 @@
+<apex:page showheader="false" standardController="echosign_dev1__SIGN_Agreement__c" extensions="echosign_dev1.EchoSignAgreementAdvanced" title="{!$Label.echosign_dev1__delete_agreement_page_title}">
+  <apex:variable var="tabUrl"
+                 value="{!URLFOR($Action.echosign_dev1__SIGN_Agreement__c.Tab, $ObjectType.echosign_dev1__SIGN_Agreement__c)}"/>
+
+	
+    <style type="text/css"> 
+      h1 {
+color: #515151;
+font-family: 'Lucida Grande', Tahoma, Verdana, Arial, Helvetica, sans-serif;
+font-size: 20px;
+font-style: normal;
+font-variant: normal;
+font-weight: normal;
+height: auto;
+line-height: normal;
+margin-bottom: 7px;
+margin-left: 0px;
+margin-right: 0px;
+margin-top: 7px;        
+      }
+    </style>
+
+	<apex:form >
+		<apex:actionFunction name="deleteAgreement" action="{!removeAgreement}" />
+	</apex:form>
+						<apex:outputpanel rendered="true">
+						    <div id="container">
+						      <div id="main">
+						        <div id="global-message-box" class="message-bl" style="width: 881px;display:none;"><div class="message-br"><div class="message-tl"><div class="message-tr">
+						          <div class="icon"></div>
+						          <span id="global-message-text"></span>
+						          <br class="clear"/>
+						        </div></div></div></div>
+						        <div id="global-error-box" class="error-bl" style="width: 881px;display:none;"><div class="error-br"><div class="error-tl"><div class="error-tr">
+						          <div class="icon"></div>
+						          <span id="global-error-text"></span>
+						          <br class="clear"/>
+						        </div></div></div></div>
+						        <h1>{!$Label.Delete_Agreement_Page_Message}</h1> 
+						    <div id="progress-bar"></div>
+						      </div>
+						    </div>
+						</apex:outputpanel>  
+		<apex:outputpanel rendered="{! ISNULL($CurrentPage.parameters.deleteButton) }">
+			<script type="text/javascript">
+                if( confirm('{!$Label.echosign_dev1__Delete_Agreement_Prompt}') ) {
+                    deleteAgreement();
+                }
+
+								if(window.parent) {
+                  setTimeout('window.parent.location.href = "{!IF(JSENCODE(agreement.ReturnURL__c)!=null,JSENCODE(agreement.ReturnURL__c),tabUrl)}"; window.close();', 2500);
+                } else {
+                  setTimeout('window.location.href = "{!IF(JSENCODE(agreement.ReturnURL__c)!=null,JSENCODE(agreement.ReturnURL__c),tabUrl)}"', 2500);
+                }
+			</script>
+		</apex:outputpanel>
+</apex:page>

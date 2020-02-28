@@ -1,0 +1,14 @@
+.THIS 
+{
+}
+.THIS.myStyle
+{
+    background-color :lightblue;
+}
+@media only screen and (min-width : 500px){
+    .THIS.myStyle
+    {
+        background-Color:lightgreen;
+    }
+    
+}

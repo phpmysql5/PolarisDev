@@ -1,0 +1,52 @@
+<apex:page standardController="echosign_dev1__Field_Template__c" extensions="echosign_dev1.FieldTemplateController" tabStyle="echosign_dev1__Agreement_Template__c">
+	<script>
+  		function confirmCancel() {
+      		var isCancel = confirm("{!JSENCODE($Label.Cancel_Confirm_Prompt)}");
+      		if( isCancel ) {
+      			return true;
+  			}
+  			
+     		return false;
+  		}  
+  	</script>
+  
+  	<apex:sectionHeader title="{!$Label.echosign_dev1__template_fields_section_header}" subtitle="{!sectionSubtitle}" />
+    
+    <apex:form >
+    	<apex:pagemessages id="theMessages"/>
+		<apex:pageBlock id="wizardPageBlock" title="{!blockTitle}">
+			<apex:pageBlockButtons >
+       			<apex:commandButton id="backButton" action="{!doBack}" value="{!$Label.echosign_dev1__back_button_label}" rerender="theMessages,fieldTemplateDescription,stepTypeSection,stepValueSection,wizardPageBlock,saveButton,backButton,nextButton" rendered="{!isStepValue}" />
+       			<apex:commandButton id="nextButton" action="{!doNext}" value="{!$Label.echosign_dev1__next_button_label}" rerender="theMessages,fieldTemplateDescription,stepTypeSection,stepValueSection,wizardPageBlock,saveButton,backButton,nextButton" rendered="{!isStepType}" />
+       			<apex:commandButton id="saveButton" action="{!doSave}" value="{!$Label.echosign_dev1__save_button_label}" rendered="{!isStepValue}" />
+        		<apex:commandButton action="{!doCancel}" value="{!$Label.echosign_dev1__cancel_button_label}" onclick="return confirmCancel()" immediate="true"/>
+        	</apex:pageBlockButtons>
+        	<apex:outputPanel id="fieldTemplateTypeDescription" rendered="{!isStepType}">
+        		{!$Label.echosign_dev1__template_fields_description_1}<br/>
+        		<br/>{!$Label.echosign_dev1__template_fields_description_2} <br/>{!$Label.echosign_dev1__template_master_label}{!masterObjectName} {!$Label.echosign_dev1__template_fields_description_3}
+      			<br/><br/>
+      		</apex:outputPanel>
+      		<apex:outputPanel id="fieldTemplateValueConstantDescription" rendered="{!isStepValueConstant}">
+        		{!$Label.echosign_dev1__template_fields_description_4}
+      			<br/><br/>
+      		</apex:outputPanel>
+      		<apex:outputPanel id="fieldTemplateValueFieldDescription" rendered="{!isStepValueField}">
+        		{!$Label.echosign_dev1__template_fields_description_5}{!masterObjectName} {!$Label.echosign_dev1__template_fields_description_6}
+      			<br/><br/>
+      		</apex:outputPanel>
+      		<apex:pageBlockSection id="stepTypeSection" columns="1">
+      			<apex:inputField id="fieldTemplateType" value="{!fieldTemplate.echosign_dev1__Type__c}" required="true" rendered="{!isStepType}"/>
+      		</apex:pageBlockSection>
+      		<apex:pageBlockSection id="stepValueSection" columns="1">
+      			<apex:inputField id="fieldTemplateConstantValue" value="{!fieldTemplate.echosign_dev1__Constant_Value__c}" rendered="{!isStepValueConstant}"/>
+      			<apex:selectList id="fieldTemplateFieldValue" value="{!fieldTemplate.echosign_dev1__Field_Value__c}" size="1" rendered="{!isStepValueField}"> 
+                	<apex:selectOptions value="{!masterFieldOptions}"/>    
+               	</apex:selectList>
+               	<apex:selectList id="fieldTemplateAgreementField" value="{!fieldTemplate.echosign_dev1__Agreement_Field__c}" size="1" required="true" rendered="{!isStepValue}"> 
+                	<apex:selectOptions value="{!agreementFieldOptions}"/>    
+               	</apex:selectList>
+      		</apex:pageBlockSection>
+  		</apex:pageBlock>
+	</apex:form>
+
+</apex:page>

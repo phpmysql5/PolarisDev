@@ -1,0 +1,60 @@
+<apex:page controller="echosign_dev1.AgreementTemplateProcessorController" title="{!$Label.echosign_dev1__processing_agreement_template_label}" sidebar="{!IF(NOT ISNULL($CurrentPage.parameters.showheadersidebar),$CurrentPage.parameters.showheadersidebar,'true')}" showHeader="{!IF(NOT ISNULL($CurrentPage.parameters.showheadersidebar),$CurrentPage.parameters.showheadersidebar,'true')}">
+<apex:form id="mainForm">
+
+    
+    <style type="text/css"> 
+      h1 {
+color: #515151;
+font-family: 'Lucida Grande', Tahoma, Verdana, Arial, Helvetica, sans-serif;
+font-size: 20px;
+font-style: normal;
+font-variant: normal;
+font-weight: normal;
+height: auto;
+line-height: normal;
+margin-bottom: 7px;
+margin-left: 0px;
+margin-right: 0px;
+margin-top: 7px;        
+      }
+
+    </style>
+    
+    <script type="text/javascript">
+        window.onload = function() {
+            if( !confirm('This will generate a new agreement, are you sure you want to continue?') ) {
+                if( (typeof sforce != 'undefined') && (sforce != null) && (sforce.one != null) ) {
+                    sforce.one.back(true);
+                } else {
+                    window.parent.close();
+                }
+                
+                return false;
+            }
+    
+            initFunction();
+        }
+    </script>
+    
+    <apex:actionFunction name="initFunction" action="{!doProcess}" />
+
+                        <apex:outputpanel rendered="true">
+                            <div id="container">
+                              <div id="main">
+                                <div id="global-message-box" class="message-bl" style="width: 881px;display:none;"><div class="message-br"><div class="message-tl"><div class="message-tr">
+                                  <div class="icon"></div>
+                                  <span id="global-message-text"></span>
+                                  <br class="clear"/>
+                                </div></div></div></div>
+                                <div id="global-error-box" class="error-bl" style="width: 881px;display:none;"><div class="error-br"><div class="error-tl"><div class="error-tr">
+                                  <div class="icon"></div>
+                                  <span id="global-error-text"></span>
+                                  <br class="clear"/>
+                                </div></div></div></div>
+                                <h1 id="progressLabel">{!$Label.Agreement_Template_Processing_Label}</h1> 
+                            <div id="progressbar"></div>
+                              </div>
+                            </div>
+                        </apex:outputpanel>   
+</apex:form>
+</apex:page>

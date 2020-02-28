@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AuthProvider xmlns="http://soap.sforce.com/2006/04/metadata">
+    <authorizeUrl>https://ironman3-dev-ed.my.salesforce.com/services/oauth2/authorize</authorizeUrl>
+    <consumerKey>3MVG9d8..z.hDcPLv1ZfNTKtI1ELCLOJqtKwrg6oe9aKEpPAwGT6KPcAvpHTBUklW7sqUD05kk8ps7z6vaDYU</consumerKey>
+    <consumerSecret>1fhC68n/BLH251pJcalMg+2tZy0dzCWs</consumerSecret>
+    <defaultScopes>refresh_token full</defaultScopes>
+    <executionUser>kshet@gmail.com</executionUser>
+    <friendlyName>ironman3</friendlyName>
+    <includeOrgIdInIdentifier>true</includeOrgIdInIdentifier>
+    <providerType>Salesforce</providerType>
+    <registrationHandler>AutocreatedRegHandler1531054568097</registrationHandler>
+    <sendAccessTokenInHeader>false</sendAccessTokenInHeader>
+    <sendClientCredentialsInHeader>false</sendClientCredentialsInHeader>
+    <sendSecretInApis>true</sendSecretInApis>
+    <tokenUrl>https://ironman3-dev-ed.my.salesforce.com/services/oauth2/token</tokenUrl>
+</AuthProvider>

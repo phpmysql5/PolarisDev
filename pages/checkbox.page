@@ -1,0 +1,7 @@
+<apex:page >
+<apex:form >
+    <apex:inputText />
+    <apex:inputCheckbox />
+    <apex:inputText />    
+</apex:form>
+</apex:page>

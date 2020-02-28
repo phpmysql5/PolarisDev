@@ -1,0 +1,6 @@
+<aura:component  implements ="force:appHostable" >
+    <aura:handler event ="aura:waiting" action="{!c.showSpinner}" />
+    <aura:handler event ="aura:doneWaiting" action ="{!c.hideSpinner}"/>
+	
+
+</aura:component>

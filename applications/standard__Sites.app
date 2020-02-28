@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <defaultLandingTab>standard-home</defaultLandingTab>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <tabs>standard-Chatter</tabs>
+    <tabs>Capital__c</tabs>
+    <tabs>C__c</tabs>
+    <tabs>Drink_Order__c</tabs>
+    <tabs>Fulfillment_Queue__c</tabs>
+    <tabs>Suggestion__c</tabs>
+    <tabs>Battle_Station__c</tabs>
+    <tabs>Resource__c</tabs>
+    <tabs>Supply__c</tabs>
+    <tabs>Customer_Satisfaction_Survey__c</tabs>
+    <tabs>Survey_Customers_webtab</tabs>
+    <tabs>Reassign_Accounts</tabs>
+    <tabs>Phone_Plan__x</tabs>
+    <tabs>Speaker__c</tabs>
+    <tabs>Session_Speaker__c</tabs>
+    <tabs>Session__c</tabs>
+    <tabs>HelloMobile</tabs>
+    <tabs>MobileContacts</tabs>
+    <tabs>List_of_Students__c</tabs>
+    <tabs>Employee2__c</tabs>
+    <tabs>pop__c</tabs>
+    <tabs>CHECK2__c</tabs>
+    <tabs>Lecturer__c</tabs>
+    <tabs>Class__c</tabs>
+    <tabs>Colleagues__c</tabs>
+    <tabs>GitUser__c</tabs>
+    <tabs>Consultant__c</tabs>
+    <tabs>Bot_Appointment__c</tabs>
+    <tabs>Bot_Order__c</tabs>
+    <tabs>series</tabs>
+</CustomApplication>

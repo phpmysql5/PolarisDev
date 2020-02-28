@@ -1,0 +1,108 @@
+<aura:component controller = 'UsersController' >
+    <aura:attribute name ='user' type ='Colleagues__c' />
+    <aura:attribute name="enableIfSelected" type="Boolean" default="true" />
+    <aura:attribute name="selectedUsers" type="String[]"  />
+    <aura:attribute name="isOpen" type="boolean" default="false"/>
+     <aura:attribute name="options" type="List" 
+                     default="[{'label': 'Farewell', 'value': 'Farewell'},{'label': 'Birthday', 'value': 'Birthday'}]"/>
+    
+    <aura:attribute name="value" type="String" default=""/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+   
+    <div aura:id="container" >
+        
+        <div class="slds-text-heading--medium">Colleagues</div>
+        <lightning:layout>
+        <ul aura:id="from-draggable" class="slds-list_horizontal"  >
+            
+            <aura:iteration items="{!v.user}" var="users" >
+                <li class="slds-p-around--xx-small">
+                    <article class="slds-card">
+                        
+                 
+                        <p class="slds-text-heading--medium" > <lightning:avatar src="/bad/image/url.jpg"  fallbackIconName="standard:avatar"  alternativeText="{!users.Name}" class="slds-m-right_small"/>{!users.Name}</p>
+                      
+                    </article>
+                </li>
+                
+                
+            </aura:iteration>
+              
+            <br/>
+            <br/>
+        
+           
+            <li class="slds-p-around--xx-small slds-hide" aura:id="from-placekeeper">
+                <div class="slds-file-selector__dropzone" style="height: 50px">
+                    <span class="slds-file-selector__text">Drag and Drop Here</span>
+                </div>
+            </li>
+        </ul>
+        </lightning:layout>   
+        <div class="slds-text-heading--medium">Selected</div>
+        
+        <div class="slds-panel slds-grid slds-grid--vertical slds-nowrap">
+            <ul aura:id="to-draggable" class="to-draggable">
+                <lightning:button variant="brand" label="SendMail" title="SendMail" onclick="{! c.sendMail }"  disabled="{!v.enableIfSelected}" />
+                <br/>
+                <li class="slds-p-around--x-small" aura:id="to-placekeeper">
+                    <div class="slds-file-selector__dropzone" style="height: 50px">
+                        <span class="slds-file-selector__text">Drag and Drop Here</span> 
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+   
+     <div class="slds-m-around--xx-large">
+  <!--Use aura:if tag to display Model Box, on the bese of conditions. [isOpen boolean attribute] -->   
+  <aura:if isTrue="{!v.isOpen}">
+      <div role="dialog" tabindex="-1" aria-labelledby="header99" class="slds-modal slds-fade-in-open ">
+          <div class="slds-modal__container">
+              <!-- ###### MODAL BOX HEADER Part Start From Here ######-->
+              <div class="slds-modal__header">
+                
+                  <h2 id="header99" class="slds-text-heading--large"> Extra Info </h2>
+              </div>
+              <!--###### MODAL BOX BODY Part Start From Here ######-->
+              <div class="slds-modal__content slds-p-around--medium">
+                  <div class="slds-form--stacked slds-tile"> 
+                      <!-- example Display the new contact form -->
+                      
+
+                      
+                      <lightning:input   aura:id = "name2" label="Whose Bday/Fairwell"  required="true"/>
+                      <br/>
+                       
+                      <lightning:input type ='number'  aura:id = "cake"  label="Cake Cost"  required="true"/>
+                      <br/>
+                      
+                        <lightning:radioGroup name="radioGroup" aura:id ='radioG'
+                          label="Radio Group"
+                          options="{! v.options }"
+                          value="{! v.value }"
+                          type="radio"/>
+                      
+                                            
+                   <ui:inputDateTime aura:id="today" label="Time" class="field" value="" displayDatePicker="true" />
+                  <lightning:button label="Neutral" title="Neutral action" onclick="{!c.closeModel }"/>
+                 
+                  </div></div>
+          </div>
+      </div>
+      <div class="slds-backdrop slds-backdrop--open"></div>
+  </aura:if>
+</div>
+    
+
+    
+    <ltng:require styles="{!$Resource.dragula + '/dragula-master/dist/dragula.css'}"
+                  scripts="{!$Resource.dragula + '/dragula-master/dist/dragula.js'}"
+                  afterScriptsLoaded="{!c.afterDragulaLoaded}"
+                  />
+    
+     
+
+</aura:component>

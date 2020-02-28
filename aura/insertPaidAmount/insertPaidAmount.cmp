@@ -1,0 +1,24 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes"
+                access="global"
+                controller="UsersController">
+    <aura:attribute name="data" type="Object"/>
+    <aura:attribute name="columns" type="List"/>
+    <aura:attribute name="recordId" type="String"/>
+    <!-- This attribute will hold the update records from data table-->
+    <aura:attribute name="updatedRecord" type="Object[]" />
+
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+
+    <!-- You must define keyField as 'Id' to save the record back in Salesforce
+'onsave' attribute will executed when user clicks on save button -->
+    <lightning:card title="Colleagues Datatable">
+        <lightning:datatable
+                             aura:id="accountDataTable"
+                             columns="{! v.columns }"
+                             data="{! v.data }"
+                             keyField="Id"
+                             onsave ="{!c.onSave}"
+                             hideCheckboxColumn="true"
+                             onrowaction="{! c.handleRowAction }" />
+    </lightning:card>
+</aura:component>

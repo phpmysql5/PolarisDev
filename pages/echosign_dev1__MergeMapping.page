@@ -1,0 +1,549 @@
+<apex:page standardController="echosign_dev1__SIGN_Merge_Mapping__c" 
+    extensions="echosign_dev1.MergeMappingController" 
+    title="{!$Label.echosign_dev1__merge_mapping_page_title} {!mapping.Name}" 
+    sidebar="{!IF(NOT ISNULL($CurrentPage.parameters.showheadersidebar),$CurrentPage.parameters.showheadersidebar,'true')}" 
+    showHeader="{!IF(NOT ISNULL($CurrentPage.parameters.showheadersidebar),$CurrentPage.parameters.showheadersidebar,'true')}">
+    
+    <apex:includeScript value="{! IF( userLanguage = 'en_US', $Resource.walkmeimpt, '' ) }"/>
+    
+	<apex:includeScript value="{!$Resource.echosign_dev1__jquery321}"/>
+    <apex:includeScript value="{!URLFOR($Resource.echosign_dev1__jqueryui1120, 'jquery-ui-1.12.0.custom/jquery-ui.min.js')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.echosign_dev1__jqueryui1120, 'jquery-ui-1.12.0.custom/jquery-ui.min.css')}"/>
+
+    
+    <style type="text/css">
+        .ui-widget-overlay {
+            background: #666666 50% 50% repeat;
+            opacity: .5;
+            filter: Alpha(Opacity=50);
+        }
+        .esDialogClass .ui-widget-header {
+            background: rgb(124, 197, 234);
+            border: 1px solid rgb(124, 197, 234);
+        }
+        
+        @font-face {
+            font-family: AdobeCleanRegular;
+            src: url('{!URLFOR($Resource.AdobeFonts,'AdobeClean-Regular.otf')}') format('opentype');
+        }
+                  
+        @font-face {
+            font-family: AdobeCleanBold;
+            src: url('{!URLFOR($Resource.AdobeFonts,'AdobeClean-Bold.otf')}') format('opentype');
+        }
+        
+        .adobePrimaryText {
+            font-size: 14px;
+            font-family: AdobeCleanRegular;
+            color: #4B4B4B;
+            -moz-opacity: 1.0;
+            -khtml-opacity: 1.0;
+             opacity: 1.0;
+        }
+        
+        .adobePrimaryBoldText {
+            font-size: 14px;
+            font-family: AdobeCleanBold;
+            color: #4B4B4B;
+            -moz-opacity: 1.0;
+            -khtml-opacity: 1.0;
+             opacity: 1.0;
+        }
+    </style>
+    
+    <script>
+        $jquery = jQuery.noConflict();
+        
+        $jquery(document).ready( function() {
+            if( !{!isApiKeySet} ) {
+                var uiThemeDisplayed = "{!$User.UIThemeDisplayed}";
+                if( uiThemeDisplayed == 'Theme4d' || uiThemeDisplayed == 'Theme4t' ) {
+                    var openUrl = '/apex/EchoSignSetupWizard';
+					window.open(openUrl); 
+                    window.parent.location.href = '/';
+                } else {
+                	var retUrl = encodeURIComponent( window.location.href );
+                	window.location.href = '/apex/EchoSignSetupWizard?retUrl=' + retUrl;
+                }
+            } else {
+                document.getElementById('{!$Component.mappingPanel}').style.display = 'block';
+            }
+            
+            $jquery("#fieldMappingSettingsDialog").dialog(
+            {
+                width:"auto",
+                autoOpen:false,
+                position:{ my: "center", at: "center", of: window },
+                modal:true,
+                closeable:false,
+                resizable:false,
+                draggable:true,
+                overlay:{opacity:5.0,background:"red"},
+                dialogClass: "esDialogClass",
+                title:"Settings"
+            });
+            
+            $jquery("#objectSelectorPanel").dialog(
+            {
+                width:"auto",
+                height:"auto",
+                autoOpen:false,
+                position:{ my: "center", at: "center", of: window },
+                modal:true,
+                closeable:false,
+                resizable:false,
+                draggable:true,
+                overlay:{opacity:5.0,background:"red"},
+                dialogClass:"esDialogClass",
+                title:"{!$Label.Object_Selector_Dialog_Title}"
+            });
+        });
+        
+        function showSettingsDialog() {
+            $jquery("#fieldMappingSettingsDialog").dialog("open");
+        }
+        
+        function showObjectSelectorDialog() {
+            $jquery("#objectSelectorPanel").dialog("open");
+        }
+        
+        function hideObjectSelectorDialog() {
+            $jquery('#objectSelectorPanel').dialog('close');
+        }
+        
+        // Calculate the size of the page so we can set the popup size
+        var viewportwidth;
+        var viewportheight;
+        
+        // the more standards compliant browsers (mozilla/netscape/opera/IE7) use window.innerWidth and window.innerHeight   
+        if (typeof window.innerWidth != 'undefined') {
+             viewportwidth = window.innerWidth,
+             viewportheight = window.innerHeight
+        } else if (typeof document.documentElement != 'undefined'
+            && typeof document.documentElement.clientWidth !=
+            'undefined' && document.documentElement.clientWidth != 0) { // IE6 in standards compliant mode (i.e. with a valid doctype as the first line in the document)
+              viewportwidth = document.documentElement.clientWidth,
+              viewportheight = document.documentElement.clientHeight
+        } else { // older versions of IE
+              viewportwidth = document.getElementsByTagName('body')[0].clientWidth,
+              viewportheight = document.getElementsByTagName('body')[0].clientHeight
+        }
+    </script>       
+    
+    <apex:outputpanel id="mappingPanel" style="display: none;">
+    
+    <apex:form id="ProcessTemplateId">
+        <apex:sectionHeader title="{!$Label.echosign_dev1__merge_mapping_page_header}" subtitle="{!mappingName}"/>
+        
+        <apex:pagemessages id="theMessages"/>  
+        
+        <apex:pageBlock title="{!$Label.echosign_dev1__merge_mapping_block_title}" helpTitle="{!$Label.echosign_dev1__merge_mapping_help_title}" helpUrl="https://helpx.adobe.com/sign/help/adobe_sign_for_salesforce_data_mapping_guide.html" id="actionPageBlock">
+            <apex:pageBlockButtons location="top">
+                <apex:commandbutton action="{!save}" value="{!$Label.echosign_dev1__save_button_label}"/>
+                <apex:commandbutton action="{!cancel}" value="{!$Label.echosign_dev1__cancel_button_label}" onclick="if(!confirm('{!$Label.echosign_dev1__confirm_prompt}')){return false;}" />
+                <apex:commandbutton action="{!delete}" value="{!$Label.echosign_dev1__delete_button_label}" onclick="if(!confirm('{!$Label.echosign_dev1__confirm_prompt}')){return false;}" /> 
+                <apex:commandbutton action="{!cloneMapping}" value="{!$Label.echosign_dev1__clone_button_label}"/>                        
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection title="{!$Label.echosign_dev1__merge_mapping_information_section_header}" collapsible="false" columns="1">
+                <apex:outputpanel >{!$Label.Merge_Mapping_Description_One}  
+                {!$Label.Merge_Mapping_Description_Two} <a style="color: blue;" href="{!URLFOR($Action.Merge_Mapping_Settings__c.New)}}" target="_self">{!$Label.Merge_Mapping_Description_Three}</a> {!$Label.Merge_Mapping_Description_Four} <a style="color: blue;" href="https://helpx.adobe.com/sign/help/adobe_sign_for_salesforce_installation_guide.html" target="pdf">{!$Label.Merge_Mapping_Description_Five}</a> {!$Label.Merge_Mapping_Description_Six}</apex:outputPanel>
+                </apex:pageBlockSection>
+                <apex:pageBlockSection collapsible="false" columns="2">
+                    <apex:pageBlockSectionItem labelStyle="text-align: left; padding-left: 10px; width: 13%;" dataStyle="width: 5%;">
+                        <apex:outputLabel value="{!$Label.echosign_dev1__echosign_merge_mapping_name_label}" for="mappingNameField"/>
+                        <apex:inputfield value="{!mapping.Name}" required="true" id="mappingNameField" />
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem labelStyle="width: 8%;">
+                        <apex:outputPanel title="{!$ObjectType.echosign_dev1__SIGN_Merge_Mapping__c.fields.echosign_dev1__Default__c.inlineHelpText}">
+                            <apex:outputLabel value="{!$ObjectType.echosign_dev1__SIGN_Merge_Mapping__c.fields.echosign_dev1__Default__c.label}" for="mappingDefaultField"/>
+                        </apex:outputPanel>
+                        <apex:inputfield value="{!mapping.echosign_dev1__Default__c}" id="mappingDefaultField"/>
+                    </apex:pageBlockSectionItem>
+                </apex:pageBlockSection>
+                <apex:pageBlockSection id="s0" title="{!$Label.echosign_dev1__merge_mapping_import_title}" collapsible="true" columns="1">
+                    <script>twistSection(document.getElementById("{!$Component.ProcessTemplateId.actionPageBlock.s0}").childNodes[0].childNodes[0]); </script>
+                    <apex:pageBlockSectionItem >
+                        {!$Label.echosign_dev1__merge_mapping_import_description_one}  
+                        {!$Label.echosign_dev1__merge_mapping_import_description_two}
+                    </apex:pageBlockSectionItem>                               
+                    <apex:pageBlockSectionItem >
+                        <apex:outputPanel >
+                            <table width="100%">                            
+                                <tr>
+                                    <td align="left" style="width: 400px;">
+                                        <apex:outputpanel id="totalImportFormFieldNamesPanel"><font color="red">{!totalImportedFormFieldNames}</font> {!$Label.echosign_dev1__data_mapping_import_count_postfix}</apex:outputPanel>
+                                    </td>
+                                    <td align="left" style="width: 150px;">
+                                        <b><apex:outputlabel value="{!$Label.echosign_dev1__merge_mapping_import_prefix}"/></b>
+                                    </td>
+                                    <td align="left" style="width: 200px;">
+                                        <apex:inputfield value="{!importAgreement.echosign_dev1__Agreement__c}">
+                                            <apex:actionSupport event="onchange"
+                                                action="{!onAgreementLookupChange}"
+                                                rerender="formButton,theMessages"/>
+                                        </apex:inputfield>
+                                    </td>
+                                    <td align="left" style="margin-left: 0px; padding-left: 0px; border-left: 0px;">
+                                        <apex:commandbutton action="{!retrieveFormFields}" value="{!$Label.echosign_dev1__data_mapping_import_button_label}" status="FormLoadingStatus" id="formButton" disabled="{!isRetrieveFormDataButtonDisabled}" rerender="theMessages,totalImportFormFieldNamesPanel,fieldMappingsBlock"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <apex:actionStatus id="FormLoadingStatus">
+                                            <apex:facet name="start">
+                                                <div class="waitingSearchDiv" style="width: 100%; height: 100%; display: ; opacity:.5;" />
+                                                <img src="{!$Resource.loading}" style="width:20px;height:20px" />
+                                            </apex:facet>
+                                        </apex:actionStatus>
+                                    </td>
+                                </tr>
+                            </table>
+                        </apex:outputPanel>
+                     </apex:pageBlockSectionItem>                                                                                           
+                </apex:pageBlockSection>
+        </apex:pageBlock>
+        <apex:pageBlock id="fieldMappingsBlock" mode="edit">
+            <apex:pageBlockSection collapsible="false" columns="1">     
+                <apex:pageBlockSectionItem >
+                    <b>{!$Label.echosign_dev1__merge_mapping_items_label}</b>   
+                </apex:pageBlockSectionItem>                                                                      
+            </apex:pageBlockSection>      
+            <apex:pageBlockSection id="fieldMappingsGroupSection" title="{!$Label.echosign_dev1__merge_mapping_field_section_header}" columns="1">
+                <apex:outputPanel id="fieldMappingsGroupSectionList">
+                    <apex:pageBlockTable id="fieldMappingsGroupsTable" value="{!formFieldMappingEntries}" var="formFieldMappingEntry" columns="6">
+                        <apex:column style="padding-right: 0px; margin-right: 0px; padding-left: 5px; border-bottom-style: solid; border-bottom-width: {! IF(formFieldMappingEntry.mappingEntry.Index__c = formFieldMappingEntry.formFieldMapping.mappingEntries.size, 2, 0) }px; border-bottom-color: #63A4C5;">
+                            <apex:outputpanel id="fieldMappingSelector" rendered="{! formFieldMappingEntry.mappingEntry.Index__c == 1 }">
+                                <apex:image title="{!$Label.echosign_dev1__data_mapping_list_type_title}" value="{!$Resource.echosign_dev1__ListFormFieldName}" rendered="{! formFieldMappingEntry.formFieldMapping.mapping.Input_Type__c <> 'List' }">
+                                    <apex:actionSupport event="onclick" action="{!toggleFormFieldNameSelector}" rerender="targetFormFieldPanel,fieldMappingSelector,theMessages">
+                                        <apex:param value="{!formFieldMappingEntry.mapping.echosign_dev1__Index__c}" name="selectedMapping" assignTo="{!selectedMapping}" />
+                                    </apex:actionSupport>
+                                 </apex:image>
+                                 <apex:image title="{!$Label.echosign_dev1__data_mapping_text_type_title}" value="{!$Resource.echosign_dev1__TextFormFieldName}" rendered="{! formFieldMappingEntry.formFieldMapping.mapping.Input_Type__c <> 'Text' }">
+                                    <apex:actionSupport event="onclick" action="{!toggleFormFieldNameSelector}" rerender="targetFormFieldPanel,fieldMappingSelector,theMessages">
+                                        <apex:param value="{!formFieldMappingEntry.mapping.echosign_dev1__Index__c}" name="selectedMapping" assignTo="{!selectedMapping}" />
+                                    </apex:actionSupport>
+                                 </apex:image>
+                            </apex:outputpanel>
+                        </apex:column>
+                        <apex:column width="20%" style="border-bottom-style: solid; border-bottom-width: {! IF(formFieldMappingEntry.mappingEntry.Index__c = formFieldMappingEntry.formFieldMapping.mappingEntries.size, 2, 0) }px; border-bottom-color: #63A4C5">
+                            <apex:facet name="header"><apex:outputpanel title="{!$Label.echosign_dev1__merge_mapping_target_title}">{!$ObjectType.echosign_dev1__SIGN_Form_Field_Mapping__c.fields.echosign_dev1__Form_Field_Name__c.label}</apex:outputpanel></apex:facet>
+                            <apex:outputpanel id="targetFormFieldPanel">
+                                <apex:outputpanel rendered="{! ( formFieldMappingEntry.mappingEntry.Index__c == 1 ) && ( formFieldMappingEntry.formFieldMapping.mapping.Input_Type__c = 'List' ) }">
+                                    <apex:selectList id="fieldMappingTarget" value="{!formFieldMappingEntry.mapping.echosign_dev1__Form_Field_Name__c}" size="1" required="true"> 
+                                        <apex:selectOptions value="{!formFieldsOptions}"/>    
+                                    </apex:selectList>
+                                </apex:outputpanel>
+                                <apex:inputText value="{!formFieldMappingEntry.mapping.echosign_dev1__Form_Field_Name__c}" style="width: 200px;" rendered="{! ( formFieldMappingEntry.mappingEntry.Index__c == 1 ) && ( formFieldMappingEntry.formFieldMapping.mapping.Input_Type__c = 'Text' ) }"/>
+                                <apex:outputpanel rendered="{!formFieldMappingEntry.mappingEntry.echosign_dev1__Index__c != 1}">
+                                    <apex:outputText >{!$Label.echosign_dev1__merge_mapping_alternate_mapping_label}</apex:outputText>
+                                </apex:outputpanel>
+                            </apex:outputpanel>      
+                        </apex:column>
+                        <apex:column width="15%" style="border-bottom-style: solid; border-bottom-width: {! IF(formFieldMappingEntry.mappingEntry.Index__c = formFieldMappingEntry.formFieldMapping.mappingEntries.size, 2, 0) }px; border-bottom-color: #63A4C5">
+                            <apex:facet name="header"><apex:outputpanel title="{!$Label.echosign_dev1__merge_mapping_source_title}">{!$ObjectType.echosign_dev1__SIGN_Form_Field_Mapping_Entry__c.fields.echosign_dev1__Type__c.label}</apex:outputpanel></apex:facet>
+                            <apex:outputpanel id="fieldMappingEntryTypePanel">
+                                <apex:inputfield id="fieldMappingEntryType" value="{!formFieldMappingEntry.mappingEntry.echosign_dev1__Type__c}" required="true">
+                                    <apex:actionSupport event="onchange" action="{!onMappingTypeChange}" rerender="fieldMappingsBlock,theMessages">
+                                        <apex:param value="{!formFieldMappingEntry.mapping.echosign_dev1__Index__c}" name="selectedMapping" assignTo="{!selectedMapping}" />
+                                        <apex:param value="{!formFieldMappingEntry.mappingEntry.echosign_dev1__Index__c}" name="selectedMappingEntry" assignTo="{!selectedMappingEntry}" />   
+                                    </apex:actionSupport>
+                                </apex:inputfield> 
+                            </apex:outputpanel>
+                        </apex:column>
+                        <apex:column width="30%" style="border-bottom-style: solid; border-bottom-width: {! IF(formFieldMappingEntry.mappingEntry.Index__c = formFieldMappingEntry.formFieldMapping.mappingEntries.size, 2, 0) }px; border-bottom-color: #63A4C5">
+                            <apex:facet name="header"><apex:outputpanel title="{!$Label.echosign_dev1__merge_mapping_source_value_title}">{!$Label.echosign_dev1__merge_mapping_source_value}</apex:outputpanel></apex:facet>
+                            <apex:outputpanel id="fieldMappingEntryValuePanel">
+                                <apex:outputpanel rendered="{! formFieldMappingEntry.mappingEntry.Type__c = 'Salesforce Object Field' }">
+                                    <apex:commandlink value="{!formFieldMappingEntry.objectLinkLabel}" 
+                                        action="{!onShowSelectMappingSourceField}" 
+                                        oncomplete="showObjectSelectorDialog();" rerender="objectSelectorOutputPanel,ProcessTemplateId">
+                                        <apex:param value="{!formFieldMappingEntry.mapping.echosign_dev1__Index__c}" name="selectedMapping" assignTo="{!selectedMapping}" />
+                                        <apex:param value="{!formFieldMappingEntry.mappingEntry.echosign_dev1__Index__c}" name="selectedMappingEntry" assignTo="{!selectedMappingEntry}" />
+                                        <apex:param value="" name="selectedChildMapping" assignTo="{!selectedChildMapping}" />
+                                    </apex:commandlink>
+                                    &nbsp;:&nbsp;
+                                    <apex:outputText id="objectSelectorSummaryLabel" value="{!formFieldMappingEntry.objectSummaryLabel}"/>
+                                </apex:outputpanel>
+                                <apex:outputpanel rendered="{!formFieldMappingEntry.mappingEntry.echosign_dev1__Type__c = 'Constant'}">                                                               
+                                    <apex:inputfield id="fieldMappingEntryValueConstant" value="{!formFieldMappingEntry.mappingEntry.echosign_dev1__Value__c}" style="width: 300px;">
+                                    </apex:inputfield>
+                                </apex:outputpanel> 
+                            </apex:outputpanel>
+                        </apex:column>
+                        <apex:column width="5%" style="border-bottom-style: solid; border-bottom-width: {! IF(formFieldMappingEntry.mappingEntry.Index__c = formFieldMappingEntry.formFieldMapping.mappingEntries.size, 2, 0) }px; border-bottom-color: #63A4C5">
+                            <apex:facet name="header">{!$ObjectType.echosign_dev1__SIGN_Form_Field_Mapping_Entry__c.fields.echosign_dev1__Disable__c.label}</apex:facet>
+                            <apex:inputfield id="fieldMappingEntryDisable" value="{!formFieldMappingEntry.mappingEntry.echosign_dev1__Disable__c}">
+                            </apex:inputfield>                
+                        </apex:column> 
+                        <apex:column width="30%" style="border-bottom-style: solid; border-bottom-width: {! IF(formFieldMappingEntry.mappingEntry.Index__c = formFieldMappingEntry.formFieldMapping.mappingEntries.size, 2, 0) }px; border-bottom-color: #63A4C5">
+                            <apex:facet name="header">{!$Label.echosign_dev1__actions_column_header}</apex:facet>
+                            <apex:outputpanel id="fieldMappingEntryActionPanel">
+                                <apex:outputpanel >
+                                    <apex:commandButton id="fieldMappingEntryActionDel" action="{!actionDeleteMappingEntry}" title="{!$Label.echosign_dev1__merge_mapping_delete_field_mapping_action_label}" alt="{!$Label.echosign_dev1__merge_mapping_delete_field_mapping_action_label}" image="{!$Resource.echosign_dev1__ActionDelete}" rerender="fieldMappingsBlock,theMessages" style="background:transparent;border-width:0px;">
+                                        <apex:param value="{!formFieldMappingEntry.mapping.echosign_dev1__Index__c}" name="selectedMapping" assignTo="{!selectedMapping}" />
+                                        <apex:param value="{!formFieldMappingEntry.mappingEntry.echosign_dev1__Index__c}" name="selectedMappingEntry" assignTo="{!selectedMappingEntry}" /> 
+                                    </apex:commandButton>       
+                                </apex:outputpanel>
+                                <apex:outputpanel rendered="{! formFieldMappingEntry.mappingEntry.Type__c <> 'Constant' && formFieldMappingEntry.mappingEntry.Index__c = formFieldMappingEntry.formFieldMapping.mappingEntries.size }">
+                                    <apex:commandButton id="fieldMappingEntryActionAdd" action="{!actionAddMappingEntry}" title="{!$Label.echosign_dev1__merge_mapping_alternate_field_mapping_action_label}" alt="{!$Label.echosign_dev1__merge_mapping_alternate_field_mapping_action_label}" image="{!$Resource.echosign_dev1__ActionAdd}" rerender="fieldMappingsBlock,theMessages" style="background:transparent;border-width:0px;">
+                                        <apex:param value="{!formFieldMappingEntry.mapping.echosign_dev1__Index__c}" name="selectedMapping" assignTo="{!selectedMapping}" /> 
+                                    </apex:commandButton>       
+                                </apex:outputpanel>
+                            </apex:outputpanel>
+                        </apex:column>                           
+                    </apex:pageBlockTable>
+                </apex:outputPanel>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection collapsible="false" columns="1">     
+                <apex:pageBlockSectionItem >
+                    <apex:outputPanel id="fieldMappingsButtons">
+                        <apex:commandLink action="{!addFieldMappingGroup}" value="{!$Label.echosign_dev1__merge_mapping_add_label}" rerender="fieldMappingsGroupSectionList,theMessages" status="fieldMappingsButtonsLoadingStatus">
+                        </apex:commandLink> &nbsp; &nbsp; &nbsp;
+                        <apex:actionStatus id="fieldMappingsButtonsLoadingStatus">
+                            <apex:facet name="start">
+                                <div class="waitingSearchDiv" style="width: 100%; height: 100%; display: ; opacity:.5;" />
+                                <img src="{!$Resource.loading}" style="width:20px;height:20px" />
+                            </apex:facet>
+                        </apex:actionStatus>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+             </apex:pageBlockSection>
+
+            <apex:pageBlockSection id="fieldChildMappingsGroupSection" title="{!$Label.echosign_dev1__merge_mapping_line_section_header}" columns="1">
+                <apex:outputPanel id="fieldChildMappingsGroupSectionList">
+                    <apex:pageBlockTable id="fieldChildMappingsGroupsTable" value="{!formFieldChildMappings}" var="formFieldChildMapping" columns="3">
+                        
+                        <apex:column width="30%" style="border-bottom-style: solid; border-bottom-width: 0px; border-bottom-color: #63A4C5">
+                            <apex:facet name="header"><apex:outputpanel title="{!$Label.echosign_dev1__merge_mapping_source_value_title}">{!$Label.echosign_dev1__merge_mapping_source_value}</apex:outputpanel></apex:facet>
+                            <apex:outputpanel id="fieldChildMappingValuePanel">
+                                <apex:outputpanel >
+                                    <apex:commandlink value="{!formFieldChildMapping.objectLinkLabel}" 
+                                        action="{!onShowSelectMappingSourceField}" 
+                                        oncomplete="showObjectSelectorDialog();" 
+                                        rerender="objectSelectorOutputPanel,ProcessTemplateId">
+                                        <apex:param value="{!formFieldChildMapping.mapping.echosign_dev1__Index__c}" name="selectedChildMapping" assignTo="{!selectedChildMapping}" />
+                                        <apex:param value="" name="selectedMapping" assignTo="{!selectedMapping}" />
+                                        <apex:param value="" name="selectedMappingEntry" assignTo="{!selectedMappingEntry}" />
+                                    </apex:commandlink>
+                                    &nbsp;:&nbsp;
+                                    <apex:outputText id="objectSelectorSummaryLabelChild" value="{!formFieldChildMapping.objectSummaryLabel}"/>
+                                </apex:outputpanel>
+                            </apex:outputpanel>
+                        </apex:column>
+                        <apex:column width="5%" style="border-bottom-style: solid; border-bottom-width: 0px; border-bottom-color: #63A4C5">
+                            <apex:facet name="header">{!$ObjectType.echosign_dev1__Form_Field_Child_Mapping__c.fields.echosign_dev1__Disable__c.label}</apex:facet>
+                            <apex:inputfield id="fieldChildMappingEntryDisable" value="{!formFieldChildMapping.mapping.echosign_dev1__Disable__c}">
+                            </apex:inputfield>                
+                        </apex:column>
+                        <apex:column width="30%" style="border-bottom-style: solid; border-bottom-width: 0px; border-bottom-color: #63A4C5">
+                            <apex:facet name="header">{!$Label.echosign_dev1__actions_column_header}</apex:facet>
+                            <apex:outputpanel id="fieldChildMappingEntryActionPanel">
+                                <apex:outputpanel >
+                                    <apex:commandButton id="fieldChildMappingEntryActionDel" action="{!actionDeleteChildMapping}" title="{!$Label.echosign_dev1__merge_mapping_delete_field_mapping_action_label}" alt="{!$Label.echosign_dev1__merge_mapping_delete_field_mapping_action_label}" image="{!$Resource.echosign_dev1__ActionDelete}" rerender="fieldChildMappingsGroupSection,theMessages" style="background:transparent;border-width:0px;">
+                                        <apex:param value="{!formFieldChildMapping.mapping.echosign_dev1__Index__c}" name="selectedChildMapping" assignTo="{!selectedChildMapping}" /> 
+                                    </apex:commandButton>       
+                                </apex:outputpanel>
+                            </apex:outputpanel>
+                        </apex:column>                           
+                    </apex:pageBlockTable>
+                </apex:outputPanel>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection collapsible="false" columns="1">     
+                <apex:pageBlockSectionItem >
+                    <apex:outputPanel id="fieldChildMappingsButtons">
+                        <apex:commandLink action="{!addFieldChildMappingGroup}" value="{!$Label.echosign_dev1__merge_mapping_add_label}" rerender="fieldChildMappingsGroupSectionList,theMessages" status="fieldChildMappingsButtonsLoadingStatus">
+                        </apex:commandLink> &nbsp; &nbsp; &nbsp;
+                        <apex:actionStatus id="fieldChildMappingsButtonsLoadingStatus">
+                            <apex:facet name="start">
+                                <div class="waitingSearchDiv" style="width: 100%; height: 100%; display: ; opacity:.5;" />
+                                <img src="{!$Resource.loading}" style="width:20px;height:20px" />
+                            </apex:facet>
+                        </apex:actionStatus>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+             </apex:pageBlockSection>
+             
+             <apex:pageBlockButtons location="bottom">
+                <apex:commandbutton action="{!save}" value="{!$Label.echosign_dev1__save_button_label}"/>
+                <apex:commandbutton action="{!cancel}" value="{!$Label.echosign_dev1__cancel_button_label}" onclick="if(!confirm('{!$Label.echosign_dev1__confirm_prompt}')){return false;}" />
+                <apex:commandbutton action="{!delete}" value="{!$Label.echosign_dev1__delete_button_label}" onclick="if(!confirm('{!$Label.echosign_dev1__confirm_prompt}')){return false;}" /> 
+                <apex:commandbutton action="{!cloneMapping}" value="{!$Label.echosign_dev1__clone_button_label}"/>                        
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+    
+    </apex:outputpanel>
+                
+    <div id="objectSelectorPanel" style="display: none; width:400px;">
+        <apex:outputPanel id="objectSelectorOutputPanel">
+        <apex:form >
+            <apex:pageBlock >
+                <apex:outputPanel id="thePanel" layout="block" style="font-size: 1.2em;"><p><h2>{!$Label.echosign_dev1__merge_mapping_selector_header}</h2></p></apex:outputPanel>
+                <apex:pageblockbuttons location="bottom">
+                	<apex:outputPanel layout="block" style="padding-left: 50px;">
+						<apex:commandbutton id="selectMappingSourceField" 
+		                	value="{!$Label.echosign_dev1__done_button_label}"
+		                    action="{!onSelectMappingSourceField}"
+		                    oncomplete="hideObjectSelectorDialog();" 
+		                    disabled="{! IF(selectedMappingEntryObjectCopy <> NULL, selectedMappingEntryObjectCopy.isAddObjectButtonDisabled, selectedChildMappingObjectCopy.isAddObjectButtonDisabled) }"
+		                    rerender="fieldMappingEntryValuePanel,fieldMappingEntryActionPanel,fieldChildMappingsGroupSection" />
+	                     <apex:commandbutton id="cancelMappingSourceField" 
+	                        value="{!$Label.echosign_dev1__cancel_button_label}"
+	                        onclick="hideObjectSelectorDialog();" /> 
+                     </apex:outputPanel>            
+                </apex:pageblockbuttons>
+                
+                <apex:pageBlockSection id="selectorSection" title="{!$Label.echosign_dev1__merge_mapping_select_title}" collapsible="false" columns="1">
+                
+                    <apex:outputPanel id="selectorSectionContent">
+                        <table width="100">                         
+                            <tr>
+                                <td align="left" width="100px">                                                                
+                                    <span class="adobePrimaryBoldText">{!$Label.echosign_dev1__merge_mapping_selector_agreement_label}</span>
+                                </td>
+                            </tr>
+                            <apex:actionregion >                            
+                                <apex:repeat value="{!selectedMappingEntryObjectCopy.objectNodes}" var="objectNode" id="selectorObjectNodes" rendered="{! selectedMappingEntryObjectCopy <> NULL }">  
+                                    <tr>       
+                                        <td align="left" width="100px">                                       
+                                            <apex:selectList id="agreementRelationshipFields" value="{!objectNode.fieldName}" size="1" disabled="{!objectNode.disabled}" rendered="{! !objectNode.isChildObjectNode }"> 
+                                                <apex:actionSupport event="onchange" action="{!onAddSelectorObject}" rerender="objectSelectorOutputPanel,sourceField,childConfigureSection" status="AddingStatus"/>
+                                                <apex:selectOptions value="{!objectNode.fieldOptions}"/>
+                                            </apex:selectList>
+                                        </td>
+                                        <td align="left" width="5px">                                                                
+                                            <b>&nbsp; &nbsp;</b>
+                                        </td>  
+                                    </tr>
+                                </apex:repeat>                             
+                                <apex:repeat value="{!selectedChildMappingObjectCopy.objectNodes}" var="objectNode" id="selectorObjectNodesChild" rendered="{! selectedChildMappingObjectCopy <> NULL }">  
+                                    <tr>       
+                                        <td align="left" width="100px">                                       
+                                            <apex:selectList id="agreementRelationshipFieldsChild" value="{!objectNode.fieldName}" size="1" disabled="{!objectNode.disabled}" rendered="{! !objectNode.isChildObjectNode }"> 
+                                                <apex:actionSupport event="onchange" action="{!onAddSelectorObject}" rerender="objectSelectorOutputPanel,sourceField,childConfigureSection" status="AddingStatus"/>
+                                                <apex:selectOptions value="{!objectNode.fieldOptions}"/>
+                                            </apex:selectList>
+                                        </td>
+                                        <td align="left" width="5px">                                                                
+                                            <b>&nbsp; &nbsp;</b>
+                                        </td>  
+                                    </tr>
+                                </apex:repeat> 
+                                <tr>    
+                                    <td align="left" width="5px">   
+                                    		<apex:outputpanel rendered="{! selectedMappingEntryObjectCopy <> NULL }">                                          
+	                                            <apex:commandButton id="backObjectButton" 
+	                                                image="{!$Resource.echosign_dev1__MappingBackButton}" 
+	                                                action="{!onBackSelectorObject}" 
+	                                                value="{!$Label.echosign_dev1__save_button_label}" 
+	                                                rendered="{! selectedMappingEntryObjectCopy.isBackObjectButtonRendered }"
+	                                                rerender="objectSelectorOutputPanel,sourceField,childConfigureSection"
+	                                                title="{!$Label.echosign_dev1__save_button_label}"
+	                                                style="vertical align: center; width: 20px; height: 20px; background: transparent; border-width: 0px;"/>
+                                            </apex:outputpanel>
+                                            <apex:outputpanel rendered="{! selectedChildMappingObjectCopy <> NULL }">
+	                                            <apex:commandButton id="backObjectButtonChild" 
+	                                                image="{!$Resource.echosign_dev1__MappingBackButton}" 
+	                                                action="{!onBackSelectorObject}" 
+	                                                value="{!$Label.echosign_dev1__save_button_label}" 
+	                                                rendered="{! selectedChildMappingObjectCopy.isBackObjectButtonRendered }"
+	                                                rerender="objectSelectorOutputPanel,sourceField,childConfigureSection"
+	                                                title="{!$Label.echosign_dev1__save_button_label}"
+	                                                style="vertical align: center; width: 20px; height: 20px; background: transparent; border-width: 0px;"/>
+                                            </apex:outputpanel>
+                                    </td>
+                                    <td>
+                                        <apex:actionStatus id="AddingStatus">
+                                            <apex:facet name="start">
+                                            <div class="waitingSearchDiv" style="width: 100%; height: 100%; display: ; opacity:.5;"></div>
+                                            <img src="{!$Resource.Loading}" style="width:20px;height:20px" /></apex:facet>
+                                        </apex:actionStatus>
+                                    </td>                                                                                                                                                  
+                                </tr>                       
+                            </apex:actionregion>  
+                        </table>
+                    </apex:outputPanel>                      
+                </apex:pageBlockSection>
+                
+                <apex:outputPanel id="childConfigureSection" layout="block" style="padding-left: 15px;">
+                    <apex:outputPanel id="childConfigureContent" layout="block" rendered="{! selectedChildMappingObjectCopy.isChildObjectNodeSelected }">
+                    	<apex:outputpanel id="childFieldAddPanel" layout="block" style="margin-top: -30px;">
+                        	<apex:outputpanel layout="block">
+                        		<span class="adobePrimaryBoldText">{! $Label.Child_Mapping_Selections_Label }</span>
+	                        </apex:outputpanel>
+	                        <apex:outputpanel layout="block" style="padding-top: 5px;">
+		                    	<apex:selectList value="{! selectedChildMappingObjectCopy.selectedChildFieldName }" size="1"> 
+		                        	<apex:actionSupport event="onchange" rerender="childFieldAddPanel" />
+		                           	<apex:selectOptions value="{! selectedChildMappingObjectCopy.childObjectNode.childUnselectedFieldOptions }"/>
+		                        </apex:selectList>
+		                        <apex:outputPanel >
+			                        <apex:outputPanel rendered="{! selectedChildMappingObjectCopy.selectedChildFieldName <> NULL }">
+				                        <apex:image style="vertical-align: middle; padding-left: 10px;" title="{!$Label.echosign_dev1__add_button_label}" value="{!$Resource.echosign_dev1__PlusGreenCircle}">
+				                        	<apex:actionSupport event="onclick" action="{!onAddChildField}" rerender="childConfigureContent"/>
+			                        	</apex:image>
+			                        </apex:outputPanel>
+		                        </apex:outputPanel>
+	                        </apex:outputpanel>
+                        </apex:outputpanel>
+                        <apex:outputPanel id="mappedChildFieldsPanel" layout="block" style="padding-top: 20px;">
+	                        <apex:pageBlockTable id="mappedChildFieldsTable" value="{! selectedChildMappingObjectCopy.formFieldChildMappingEntries }" var="childFieldMapping" columns="3">                        
+                        		<apex:column width="10%" style="border-bottom-style: solid; border-bottom-width: 0px; border-bottom-color: #63A4C5">
+		                            <apex:facet name="header">{!$Label.echosign_dev1__actions_column_header}</apex:facet>
+		                            <apex:outputpanel >
+		                                <apex:outputpanel >
+		                                    <apex:commandButton action="{!onDeleteChildField}" title="{!$Label.echosign_dev1__merge_mapping_delete_field_mapping_action_label}" alt="{!$Label.echosign_dev1__merge_mapping_delete_field_mapping_action_label}" image="{!$Resource.echosign_dev1__ActionDelete}" rerender="childConfigureContent" style="background:transparent;border-width:0px;">
+		                                        <apex:param value="{!childFieldMapping.fieldName}" name="selectedChildFieldName" assignTo="{! selectedChildMappingObjectCopy.selectedChildFieldName }" />
+		                                    </apex:commandButton>       
+		                                </apex:outputpanel>
+		                            </apex:outputpanel>
+                        		</apex:column> 
+		                        <apex:column style="padding-right: 0px; margin-right: 0px; padding-left: 5px; border-bottom-style: solid; border-bottom-width: 0px; border-bottom-color: #63A4C5;">
+		                            <apex:facet name="header"><apex:outputpanel title="">{!$Label.echosign_dev1__child_field_name_label}</apex:outputpanel></apex:facet>
+		                            <apex:outputpanel >
+		                                <apex:outputText value="{!childFieldMapping.fieldLabel}" style="width: 200px;"/>
+		                            </apex:outputpanel>
+		                        </apex:column>
+		                        <apex:column style="padding-right: 0px; margin-right: 0px; padding-left: 5px; border-bottom-style: solid; border-bottom-width: 0px; border-bottom-color: #63A4C5;">
+		                            <apex:facet name="header"><apex:outputpanel title="">{!$Label.echosign_dev1__child_form_field_name_label}</apex:outputpanel></apex:facet>
+		                            <apex:outputpanel >
+		                                <apex:inputField value="{!childFieldMapping.mappingEntry.echosign_dev1__Form_Field_Name__c}" style="width: 200px; margin-right: 10px;"/>
+		                            </apex:outputpanel>
+		                        </apex:column>
+	                        </apex:pageBlockTable>
+                        </apex:outputPanel>
+                    	<apex:outputpanel layout="block" style="padding-top: 15px;">
+                    		<apex:outputpanel layout="block">
+                    			<span class="adobePrimaryBoldText">{! $Label.Child_Mapping_Sort_Field_Label }</span>
+                    		</apex:outputpanel>
+                    		<apex:outputpanel layout="block">
+		                    	<apex:selectList value="{! selectedChildMappingObjectCopy.mapping.Sort_Field__c }" size="1"> 
+		                           	<apex:selectOptions value="{! selectedChildMappingObjectCopy.childObjectNode.childFieldOptions }"/>
+		                        </apex:selectList>
+	                        </apex:outputpanel>
+                        </apex:outputpanel>
+                        <apex:outputpanel layout="block" style="padding-top: 15px;">
+                        	<apex:outputpanel layout="block">
+                        		<span class="adobePrimaryBoldText">{! $Label.Child_Mapping_Sort_Order_Label }</span>
+                        	</apex:outputpanel>
+                    		<apex:outputpanel layout="block">
+		                        <apex:selectList value="{! selectedChildMappingObjectCopy.mapping.Sort_Order__c }" size="1"> 
+		                           	<apex:selectOptions value="{! sortOrderOptions }"/>
+		                        </apex:selectList>
+	                        </apex:outputpanel>
+                        </apex:outputpanel>
+                        <apex:outputpanel layout="block" style="padding-top: 15px;">
+                        	<apex:outputpanel layout="block">
+                        		<span class="adobePrimaryBoldText">{! $Label.Child_Mapping_Filter_Label }</span>
+	                        </apex:outputpanel>                      
+	                        <apex:outputpanel layout="block">
+			                	<apex:inputField value="{! selectedChildMappingObjectCopy.mapping.Query_Filter__c }" style="width: 100%; margin-right: 10px;" html-placeholder="{! $Label.Child_Query_Filter_Placeholder }"/>
+			               	</apex:outputpanel>
+		               	</apex:outputpanel>
+                    </apex:outputPanel>
+                </apex:outputPanel>
+            </apex:pageBlock>
+        </apex:form>
+        </apex:outputPanel>
+    </div>
+    
+</apex:page>

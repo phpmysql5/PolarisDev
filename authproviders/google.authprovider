@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AuthProvider xmlns="http://soap.sforce.com/2006/04/metadata">
+    <authorizeUrl>https://accounts.google.com/o/oauth2/auth</authorizeUrl>
+    <consumerKey>707864275611-6dhna9gc0q7nh91cmdp0siomb65gc3kk.apps.googleusercontent.com</consumerKey>
+    <consumerSecret>UZ3b4ql1Yfc6SQWRyZlYh3WGnGHoG+uCcEEY92ILatc=</consumerSecret>
+    <defaultScopes>profile email openid</defaultScopes>
+    <executionUser>kshet@gmail.com</executionUser>
+    <friendlyName>Google</friendlyName>
+    <includeOrgIdInIdentifier>false</includeOrgIdInIdentifier>
+    <providerType>OpenIdConnect</providerType>
+    <registrationHandler>GoogleOpenIDConnect</registrationHandler>
+    <sendAccessTokenInHeader>true</sendAccessTokenInHeader>
+    <sendClientCredentialsInHeader>false</sendClientCredentialsInHeader>
+    <sendSecretInApis>true</sendSecretInApis>
+    <tokenUrl>https://accounts.google.com/o/oauth2/token</tokenUrl>
+    <userInfoUrl>https://www.googleapis.com/plus/v1/people/me/openIdConnect</userInfoUrl>
+</AuthProvider>

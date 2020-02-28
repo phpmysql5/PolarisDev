@@ -1,0 +1,37 @@
+<apex:page sidebar="{! IF( NOT ISNULL( $CurrentPage.parameters.showheadersidebar), $CurrentPage.parameters.showheadersidebar, 'true' ) }" 
+    showHeader="{! IF( NOT ISNULL( $CurrentPage.parameters.showheadersidebar), $CurrentPage.parameters.showheadersidebar, 'true' ) }">
+    <apex:includeScript value="/lightning/lightning.out.js" />
+    
+    <apex:includeLightning />
+    
+    <apex:variable var="partnerUrl" value="{!$Api.Partner_Server_URL_370}"/>
+    
+    <!-- <apex:variable var="wizardStep" value="{! $CurrentPage.parameters.stepName }"/>
+    <apex:variable var="oauthCode" value="{! $CurrentPage.parameters.code }"/>
+    <apex:variable var="oauthError" value="{! $CurrentPage.parameters.error }"/>
+    <apex:variable var="oauthErrorDescription" value="{! $CurrentPage.parameters.error_description }"/>
+    <apex:variable var="oauthState" value="{! $CurrentPage.parameters.state }"/>
+    <apex:variable var="apiAccessPoint" value="{! $CurrentPage.parameters.api_access_point }"/> -->
+    
+    <div id="lightning" />
+
+    <script>
+    	var isLightning = (typeof sforce != 'undefined') && (sforce != null) && (sforce.one != null);
+    	var appName = "echosign_dev1:DocumentCloudSetupWizardBridge";
+    
+    	$Lightning.use(appName, function() {
+        	$Lightning.createComponent("echosign_dev1:DocumentCloudSetupWizard",
+          		{ "wizardStep" : "{! JSENCODE($CurrentPage.parameters.stepName) }",
+                  "oauthCode" : "{! JSENCODE($CurrentPage.parameters.code) }",
+                  "oauthError" : "{! JSENCODE($CurrentPage.parameters.error) }",
+                  "oauthErrorDescription" : "{! JSENCODE($CurrentPage.parameters.error_description) }",
+                  "oauthState" : "{! JSENCODE($CurrentPage.parameters.state) }",
+                  "apiAccessPoint" : "{! JSENCODE($CurrentPage.parameters.api_access_point) }",
+                  "returnUrl" : "{! JSENCODE($CurrentPage.parameters.retUrl) }",
+                  "partnerUrl" : "{! partnerUrl }" },
+          		"lightning",
+          		function(cmp) {
+          	});
+        });
+    </script>
+</apex:page>

@@ -1,0 +1,25 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global"
+                controller="insertContacts">
+    <aura:attribute name="contacts" type="contact"></aura:attribute>
+    	
+        <!--<lightning:input name="lastName" label="Insert contact last name" type="String"/>-->
+    <ui:inputText aura:id="lastName" label="Write the lastName" placeholder="Search for..." />
+
+        <lightning:button label="insert contacts" iconName="InsertLastName" iconPosition="left" 
+                          onclick="{!c.insertContacts}" />
+        
+
+<aura:renderIf isTrue="{!v.contacts}" >
+    
+    {!v.contacts.LastName}
+      
+    <aura:set attribute="else">
+      FALSE
+    </aura:set>
+  </aura:renderIf>
+   
+     
+
+
+
+</aura:component>

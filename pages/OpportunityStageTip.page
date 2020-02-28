@@ -1,0 +1,9 @@
+<apex:page standardController="Opportunity" >
+  <!-- Begin Default Content REMOVE THIS -->
+<apex:outputPanel rendered="{!if(Opportunity.stagename=='Prospecting',true,false)}"> These are Needs Analysis tips </apex:outputPanel>
+<apex:outputPanel rendered="{!if(Opportunity.stagename=='Proposal/Price Quote',true,false)}"> These are Needs Analysis tips </apex:outputPanel>
+<apex:outputPanel rendered="{!if(Opportunity.stagename=='Needs Analysis',true,false)}"> These are Needs Analysis tips </apex:outputPanel>
+<apex:outputPanel rendered="{!if(Opportunity.stagename=='Negotiation/Review',true,false)}"> These are Needs Analysis tips </apex:outputPanel>
+
+  <!-- End Default Content REMOVE THIS -->
+</apex:page>

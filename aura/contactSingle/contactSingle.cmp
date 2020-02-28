@@ -1,0 +1,17 @@
+<aura:component implements="force:appHostable" >
+       <aura:attribute name ="contact" type ="contact" ></aura:attribute>
+       <lightning:card variant="Narrow" iconName="standard:contact" title="{!v.contact.Name}" >
+        <aura:set attribute="actions">
+           <lightning:button variant="brand" label="Brand action" title="Brand action" onclick="{! c.handleClick }"  />
+        </aura:set>
+        <p class="slds-p-horizontal_small">
+            {!v.contact.name}
+        </p>
+         <aura:set attribute="footer">
+          <p class="slds-p-horizontal_small">    
+            {!v.contact.email}
+          </p>    
+        </aura:set>   
+    </lightning:card>
+	
+</aura:component>

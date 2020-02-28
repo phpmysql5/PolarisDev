@@ -1,0 +1,15 @@
+<apex:page >
+    <!--1.Make VF page compatible with lightning framework the below statement internally refers /lightning/lightning.out.js file-->
+    <apex:includeLightning />
+    
+    <!--2.Represent a place holder to place lightning component,probably a div tag-->
+    
+    <div id ='lc'>
+    </div>
+    
+     <script>
+        $Lightning.use("c:LightningOutApp",function(){
+        	$Lightning.createComponent("c:Calculator",{},'lc')
+        });
+    </script>
+</apex:page>

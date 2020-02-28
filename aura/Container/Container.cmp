@@ -1,0 +1,10 @@
+<aura:component>
+    
+     
+     <c:Child/>
+      <c:lightningAvatar/>
+ 
+   
+    
+      
+</aura:component>

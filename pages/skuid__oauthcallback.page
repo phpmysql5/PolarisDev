@@ -1,0 +1,14 @@
+<apex:page showHeader="false" sidebar="false" showChat="false">
+	<script>
+	window.skuid = {
+		platform: {
+			getOAuthProxyUri: function(){
+				return window.location.origin+(window.$A?'/skuid/oauthproxy.app':'/apex/skuid__oauthproxy');
+			}
+		}
+	};
+	</script>
+    <script src="{!URLFOR($Resource.JqueryJS)}"></script>
+    <script src="{!URLFOR($Resource.OAuthClientJS)}"></script>
+    You have been successfully authenticated! This window should close momentarily...
+</apex:page>

@@ -1,0 +1,161 @@
+<apex:page id="pg" standardStylesheets="false" controller="excelTestController"  contenttype="application/vnd.ms-excel#MultiSheetExcel.xls">
+
+{!xmlheader}
+
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+
+xmlns:o="urn:schemas-microsoft-com:office:office"
+
+xmlns:x="urn:schemas-microsoft-com:office:excel"
+
+xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+
+xmlns:html="http://www.w3.org/TR/REC-html40">
+
+<ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
+
+<WindowHeight>8535</WindowHeight>
+
+<WindowWidth>12345</WindowWidth>
+
+<WindowTopX>480</WindowTopX>
+
+<WindowTopY>90</WindowTopY>
+
+<ProtectStructure>False</ProtectStructure>
+
+<ProtectWindows>False</ProtectWindows>
+
+</ExcelWorkbook>
+
+<DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+
+<Author></Author>
+
+<LastAuthor></LastAuthor>
+
+<Company></Company>
+
+<Version>11.6360</Version>
+
+</DocumentProperties>
+
+<Styles>
+
+<Style ss:ID="Default" ss:Name="Normal">
+
+<Alignment ss:Vertical="Bottom"/>
+
+<Borders/>
+
+<Font ss:bgcolor="#FF0000"/>
+
+<Interior ss:bgcolor="#FF0000"/>
+
+<NumberFormat/>
+
+<Protection/>
+
+</Style>
+
+<Style ss:ID="s16">
+
+<Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="11" ss:Color="#FFFFFF"
+
+ss:Bold="1" ss:Italic="1"/>
+
+<Interior ss:Color="#92D050" ss:Pattern="Solid"/>
+
+</Style>
+
+<Style ss:ID="s23">
+
+<Font x:Family="Swiss" ss:Bold="0" ss:bgcolor="#FF0000"/>
+
+</Style>
+
+<Style ss:ID="s66">
+
+<Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="16" ss:Color="#000000" ss:Bold="1" ss:Italic="1"/>
+
+</Style>
+
+</Styles>
+
+<Worksheet ss:Name="Sheet1">
+
+<Table ss:ExpandedColumnCount="100">
+
+<Column ss:Width="180"/>
+
+<Row>
+
+<Cell ss:StyleID="s66"><Data ss:Type="String">Test Sheet1</Data></Cell>
+
+</Row>
+
+<Row>
+
+<Cell ss:StyleID="s16" ><Data ss:Type="String">Field1</Data></Cell>
+
+<Cell ss:StyleID="s16"><Data ss:Type="String">Field2</Data></Cell>
+
+</Row>
+
+
+
+<apex:repeat value="{!listString}" var="row">
+
+<Row>
+
+<Cell ss:StyleID="s23"><Data ss:Type="String">{!row}</Data></Cell>
+
+<Cell ss:StyleID="s23"><Data ss:Type="String">{!row}</Data></Cell>
+
+</Row>
+
+</apex:repeat>
+
+</Table>
+
+</Worksheet>
+
+<Worksheet ss:Name="Sheet2">
+
+<Table ss:ExpandedColumnCount="100">
+
+<Column ss:Width="100"/>
+
+<Column ss:Width="180"/>
+
+<Row>
+
+<Cell ss:StyleID="s66"><Data ss:Type="String">Test Sheet2</Data></Cell>
+
+</Row>
+
+<Row>
+
+<Cell ss:StyleID="s16"><Data ss:Type="String">Field1</Data></Cell>
+
+</Row>
+
+<apex:repeat value="{!listString}" var="row">
+
+<Row>
+
+<Cell ss:StyleID="s23"><Data ss:Type="String">{!row}</Data></Cell>
+
+</Row>
+
+</apex:repeat>
+
+</Table>
+
+</Worksheet>
+
+</Workbook>
+
+<apex:outputText value="{!endfile}" escape="false"/>
+
+</apex:page>

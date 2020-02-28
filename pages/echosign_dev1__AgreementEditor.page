@@ -1,0 +1,51 @@
+<apex:page standardController="echosign_dev1__SIGN_Agreement__c" 
+    sidebar="{! IF( NOT ISNULL( $CurrentPage.parameters.showheadersidebar), $CurrentPage.parameters.showheadersidebar, 'true' ) }" 
+    showHeader="{! IF( NOT ISNULL( $CurrentPage.parameters.showheadersidebar), $CurrentPage.parameters.showheadersidebar, 'true' ) }">
+    <apex:includeScript value="/lightning/lightning.out.js" />
+    
+    <link href="{!URLFOR($Resource.echosign_dev1__SLDS, 'SLDS/assets/styles/salesforce-lightning-design-system-vf.css')}" rel="stylesheet"/>
+    
+    <apex:includeLightning />
+    
+    <apex:variable var="agreementId" value="{! IF( NOT ISNULL( $CurrentPage.parameters.id), $CurrentPage.parameters.id, '' ) }"/>
+    <apex:variable var="templateId" value="{! IF( NOT ISNULL( $CurrentPage.parameters.templateId), $CurrentPage.parameters.templateId, '' ) }"/>
+    <apex:variable var="masterId" value="{! IF( NOT ISNULL( $CurrentPage.parameters.masterId), $CurrentPage.parameters.masterId, '' ) }"/>
+    <apex:variable var="actionName" value="{! IF( NOT ISNULL( $CurrentPage.parameters.onloadAction), $CurrentPage.parameters.onloadAction, '' ) }"/>
+
+    <div id="lightning" />
+
+    <script>
+    	var isLightning = (typeof sforce != 'undefined') && (sforce != null) && (sforce.one != null);
+    	var appName = "echosign_dev1:AgreementEditorBridge";
+        
+    	var agreementId = '{! agreementId }' == '' ? null : '{! agreementId }';
+    	var templateId = '{! templateId }' == '' ? null : '{! templateId }';
+    	var masterId = '{! masterId }' == '' ? null : '{! masterId }';
+    	var actionName = '{! actionName }' == '' ? null : '{! actionName }';
+        
+    	$Lightning.use(appName, function() {
+        	$Lightning.createComponent("echosign_dev1:AgreementEditor",
+          		{ "agreementId" : agreementId,
+                  "templateId" : templateId,
+                  "masterId" : masterId,
+                  "actionName" : actionName },
+          		"lightning",
+          		function(cmp) {
+          		document.getElementById("outLoader").style.display = 'none';
+          	});
+        });
+    </script>
+    
+    <div id="outLoader" style="display: block;">
+	    <div class="slds">
+	        <div class="main slds-m-bottom--large" role="main">
+			   	<div class="slds-grid slds-grid--align-center slds-m-vertical--xx-large">
+			    	<div class="slds-spinner--large slds-m-vertical--xx-large">
+			        	<img class="slds-m-vertical--xx-large" src="{!URLFOR($Resource.SLDS, 'SLDS/assets/images/spinners/slds_spinner_brand.gif')}" alt="" />
+			 		</div>
+			  	</div>
+	  		</div>
+	  	</div>
+  	</div>
+    
+</apex:page>

@@ -1,0 +1,8 @@
+<aura:component>
+    <aura:attribute name="header" type="Aura.Component[]"/>
+
+    <div >
+        <span class="header">{!v.header}</span><br/>
+        <span class="body">{!v.body}</span>
+    </div>
+</aura:component>

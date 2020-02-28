@@ -1,0 +1,6 @@
+.THIS li {
+    list-style-type: none;
+}
+.THIS article.slds-card:hover {
+    border-color: #1589ee ;
+}

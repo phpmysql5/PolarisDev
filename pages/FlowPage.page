@@ -1,0 +1,5 @@
+<apex:page >
+  <!-- Begin Default Content REMOVE THIS -->
+  <flow:interview name="New_Customer_Flow"></flow:interview>
+  <!-- End Default Content REMOVE THIS -->
+</apex:page>

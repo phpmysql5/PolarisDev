@@ -1,0 +1,42 @@
+<apex:page standardController="echosign_dev1__SIGN_Agreement__c">
+    <apex:includeScript value="/lightning/lightning.out.js" />
+    
+    <link href='/resource/echosign_dev1__SLDS/SLDS/assets/styles/salesforce-lightning-design-system-vf.css' rel="stylesheet"/>
+    
+    <apex:includeLightning />
+    
+    <apex:variable var="agreementId" value="{! IF( NOT ISNULL( $CurrentPage.parameters.agreementId), $CurrentPage.parameters.agreementId, '' ) }"/>
+    <apex:variable var="tab" value="{! IF( NOT ISNULL( $CurrentPage.parameters.tab), $CurrentPage.parameters.tab, '' ) }"/>
+    
+    <div id="lightning" />
+    
+    <script>
+    var isLightning = (typeof sforce != 'undefined') && (sforce != null) && (sforce.one != null);
+    var appName = "echosign_dev1:AgreementEventsBridge";
+    
+    var agreementId = '{! agreementId }' == '' ? null : '{! agreementId }';
+    var tab = '{! tab }' == '' ? null : '{! tab }';
+    
+    $Lightning.use(appName, function() {
+        $Lightning.createComponent("echosign_dev1:AgreementEvents",
+                                   { "agreementId" : agreementId, "tab" : tab },
+                                   "lightning",
+                                   function(cmp) {
+                                       document.getElementById("outLoader").style.display = 'none';
+                                   });
+    });
+    </script>
+    
+    <div id="outLoader" style="display: block;">
+        <div class="slds">
+            <div class="main slds-m-bottom--large" role="main">
+                <div class="slds-grid slds-grid--align-center slds-m-vertical--xx-large">
+                    <div class="slds-spinner--large slds-m-vertical--xx-large">
+                        <img class="slds-m-vertical--xx-large" src="{!$Resource.SLDS + '/SLDS/assets/images/spinners/slds_spinner_brand.gif'}" alt="" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</apex:page>

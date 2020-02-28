@@ -1,0 +1,9 @@
+<aura:component >
+   
+    <aura:attribute name='msg' type='String' access='public' default='karthik'/>  
+    
+    <!--Accessing attribute value v refers to viewport-->
+{!v.msg} Welcome to lightning!
+    
+	
+</aura:component>

@@ -1,0 +1,15 @@
+<apex:page controller="Series4_CTRL">
+
+
+<apex:form >
+  Input the range <apex:inputText value="{!inputText1}" /> 
+   <apex:commandButton value="get the range" action="{!getprocess}" /> 
+    </apex:form>
+    
+   <apex:repeat value="{!s1}" var="string" id="theRepeat"  >
+
+        <apex:outputText value="{!string}" id="theValue"/><br/>
+
+    </apex:repeat>
+    
+</apex:page>

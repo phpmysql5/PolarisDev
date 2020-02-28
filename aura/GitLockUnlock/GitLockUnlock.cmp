@@ -1,0 +1,53 @@
+<aura:component  implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" controller='GitController' access="global" >
+    
+     
+     <!--aura:attribute name ='Message' type ='STRING'></aura:attribute>
+    <aura:attribute name ='carouselPath1' type ='STRING'></aura:attribute>
+    <aura:attribute name ='carouselPath2' type ='STRING'></aura:attribute-->
+    <aura:attribute name ='objectAPI' type ='String'></aura:attribute>
+     
+    
+    
+    <!--aura:attribute name ='correctNID' type ='Boolean' default ='True'></aura:attribute>
+    <aura:attribute name ='currentNID' type ='Boolean' default ='True'></aura:attribute>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    <div class="slds-box slds-theme_default slds-size_1-of-2" >
+ <lightning:carousel >
+            <lightning:carouselImage
+                                     header = "Path1 LOCK Status " 
+                                     description = "{!v.carouselPath1}" 
+                                     alternativeText = "{!v.carouselPath1}">
+            </lightning:carouselImage>
+     
+      		<lightning:carouselImage
+                                     header = "Path2 LOCK Status" 
+                                     description = "{!v.carouselPath2}" 
+                                     alternativeText = "{!v.carouselPath2}">
+            </lightning:carouselImage>
+     
+
+        
+    </lightning:carousel>
+  
+     <lightning:select  aura:id="select" class="slds-input"   label="Select your NID" onchange="{!c.onChangeOfPicklist}"  >
+         <option value ="Git__c">Path1</option>
+         <option value  ="Git2__c">Path2</option>
+    </lightning:select> 
+        
+    <lightning:input class="slds-input"  aura:id ='NID' name="NID" label="Enter your NID" placeholder="Please enter your NID here" onchange="{!c.onRightNID}"/>
+    
+    <br/>
+    <br/>    
+        <div class="slds-box slds-theme_default" >
+    <lightning:button class="slds-size_2-of-2 slds-text-color_success"  variant="BRAND" label="LOCK" title="Lock" onclick="{! c.handleLock }" disabled="{!v.correctNID}"/>
+    <lightning:button class="slds-size_2-of-2 slds-m-around_none slds-text-color_success" variant="BRAND" label="UNLOCK" title="Unlock" onclick="{! c.handleUnlock }" disabled="{!v.currentNID}"/>
+    
+       <br/>        
+            <div class="slds-notification" style="background-color:Green">{!v.Message} </div>
+        </div>
+    </div-->
+    
+    <c:closeCaseFunctionality recordId="{!v.recordId}"  objectName ='{!v.objectAPI}' />
+</aura:component>

@@ -1,0 +1,20 @@
+<aura:component >
+    <lightning:tabset variant='vertical'>
+        <lightning:tab label='Calculator'><c:Calculator /></lightning:tab>
+        <lightning:tab label='Opportunity'><c:OpportunityComp ></c:OpportunityComp></lightning:tab>
+        <lightning:tab label='AccountComp'><c:AccountComp ></c:AccountComp></lightning:tab>
+        <lightning:tab label='ButtonExample'><c:ButtonExample ></c:ButtonExample></lightning:tab>
+        <lightning:tab label='talkingParrot'><c:talkingParrot ></c:talkingParrot></lightning:tab>
+        <lightning:tab label='angryParrot'><c:angryParrot ></c:angryParrot></lightning:tab>
+         <lightning:tab label='deckofAllCards'><c:DeckofAllcards ></c:DeckofAllcards></lightning:tab>
+        <Lightning:tab label='MenuSample'><c:MenuSample ></c:MenuSample></Lightning:tab>
+        <Lightning:tab label='LayoutExample'><c:LayoutExample ></c:LayoutExample></Lightning:tab>
+         <Lightning:tab label='responsiveDesign'><c:responsiveDesign ></c:responsiveDesign></Lightning:tab>
+         <Lightning:tab label='ModalExample'><c:ModalExample title="Modal Message">Welcome to lightning training!</c:ModalExample></Lightning:tab>
+        <Lightning:tab label='SignalJumpHandler'><c:SignalJumpHandler /></Lightning:tab>
+        <Lightning:tab label='EmergencyContainer'><c:EmergencyContainer /></Lightning:tab>
+        <Lightning:tab label='ContactForm'><c:ContactForm /></Lightning:tab>
+        
+    </lightning:tabset>
+	
+</aura:component>

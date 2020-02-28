@@ -1,0 +1,15 @@
+<aura:component >
+    <aura:attribute name='taskList' type='task[]'></aura:attribute>
+    <aura:attribute name='eventList' type='event[]'></aura:attribute>
+    <aura:handler name='init' value='{!this}' action='{!c.doInit}'></aura:handler> 
+    
+    <aura:iteration items='{!v.taskList}' var='task'>
+        <br/>{!task.Owner}
+    </aura:iteration>
+     <aura:iteration items='{!v.event}' var='event'>
+        <br/>{!event.Owner}
+    </aura:iteration>
+    
+    
+	
+</aura:component>

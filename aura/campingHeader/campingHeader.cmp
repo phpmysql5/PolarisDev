@@ -1,0 +1,11 @@
+<aura:component>
+    
+    <H1>Camping List</H1>
+    <lightning:layout pullToBoundary="medium">
+            <lightning:layoutItem flexibility="auto" padding="horizontal-medium">
+                <div class="slds-page-header">
+                <H1>Camping List</H1>
+                </div>    
+            </lightning:layoutItem>
+    </lightning:layout>
+</aura:component>

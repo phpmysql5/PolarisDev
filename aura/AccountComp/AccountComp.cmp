@@ -1,0 +1,28 @@
+<aura:component controller='AccountController' extends="c:GenericServerCall" 
+                implements="force:appHostable,flexipage:availableForAllPageTypes">
+    <aura:attribute name='accountList' type='account[]'></aura:attribute>
+    <Lightning:button name='getAllaccounts' label='getAllaccounts' variant='destructive' 
+                      onclick='{!c.getAllaccounts}'></Lightning:button>
+    <lightning:button name='getAllaccountsApparel' label='getAllaccountsApparel' variant='destructive'
+                      onclick='{!c.getAllaccountsApparel}'/>
+    
+    <table border='1px'>
+        <thead>
+            <th>Name</th>
+            <th>AccountNumber</th>
+            <th>AnnualRevenue</th>
+        </thead>
+    
+        <tbody>
+    <aura:iteration items='{!v.accountList}' var='acc' >
+        
+        <tr>
+            <td>{!acc.Name}</td>
+            <td>{!acc.AccountNumber}</td>
+            <td>{!acc.AnnualRevenue}</td>
+        </tr>
+        
+    </aura:iteration>
+            </tbody> 
+	</table>
+</aura:component>

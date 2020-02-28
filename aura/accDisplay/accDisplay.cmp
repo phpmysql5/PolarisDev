@@ -1,0 +1,39 @@
+<!--
+ - Created by Rajat on 1/24/2019.
+ -->
+
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,flexipage:availableForAllPageTypes"> <!--inherit recordId attribute-->
+    <aura:attribute name="account" type="Object"
+                    description="The record object to be displayed"/>
+    <aura:attribute name="accountRecord" type="Object"
+                    description="A simplified view record object to be displayed"/>
+    <aura:attribute name="recordError" type="String"
+                    description="An error message bound to force:recordData"/>
+    <force:recordData aura:id="AccountRecordCreator"
+                      layoutType="FULL"
+                      recordId="{!v.recordId}"
+                      targetError="{!v.recordError}"
+                      targetRecord="{!v.account}"
+                      targetFields ="{!v.accountRecord}"
+                      fields="Name,Industry,Description,Phone"
+                      mode="VIEW"/>
+
+    <!-- Display a lightning card with details about the record -->
+    <div class="Record Details">
+        <lightning:card iconName="standard:account" title="{!v.accountRecord.Name}" >
+            <div class="slds-p-horizontal--small">
+                <p class="slds-text-heading--small">
+                    <lightning:formattedText title="Industry" value="{!v.accountRecord.Industry}" /></p>
+                <p class="slds-text-heading--small">
+                    <lightning:formattedText title="Description" value="{!v.accountRecord.Description }" /></p>
+                <p class="slds-text-heading--small">
+                    <lightning:formattedPhone title="Phone" value="{!v.accountRecord.Phone}" /></p>
+            </div>
+        </lightning:card>
+    </div>
+    <!-- Display Lightning Data Service errors, if any -->
+    <aura:if isTrue="{!not(empty(v.recordError))}">
+        <div class="recordError">
+            {!v.recordError}</div>
+    </aura:if>
+</aura:component>

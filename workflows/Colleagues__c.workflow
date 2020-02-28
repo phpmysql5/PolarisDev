@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldUpdates>
+        <fullName>Substract</fullName>
+        <field>Pending_Amount__c</field>
+        <formula>Pending_Amount__c -  Paid_Amount__c</formula>
+        <name>Substract</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>addzero</fullName>
+        <field>Paid_Amount__c</field>
+        <formula>IF(ISBLANK( Paid_Amount__c ),0,Paid_Amount__c)</formula>
+        <name>addzero</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>addzero2</fullName>
+        <field>Pending_Amount__c</field>
+        <formula>IF(ISBLANK( Pending_Amount__c ),0,Pending_Amount__c)</formula>
+        <name>addzero2</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>zero</fullName>
+        <field>Pending_Amount__c</field>
+        <name>zero</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <rules>
+        <fullName>Sub</fullName>
+        <actions>
+            <name>Substract</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>true</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>avoid_null</fullName>
+        <actions>
+            <name>addzero</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>addzero2</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>True</formula>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+</Workflow>

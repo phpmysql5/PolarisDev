@@ -1,0 +1,52 @@
+<!--
+ - Created by Rajat on 1/24/2019.
+ -->
+
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,flexipage:availableForAllPageTypes">
+
+    <aura:attribute name="accountRecord" type="Object"/>
+    <aura:attribute name="recordError" type="Object"/>
+    <aura:attribute name="simpleRecord" type="Object"/>
+
+    <force:recordData recordId="{!v.recordId}"
+                      aura:id="RecordEdit"
+                      targetRecord="{!v.simpleRecord}"
+                      targetError="{!v.recordError}"
+                      targetFields="{!v.accountRecord}"
+                      fields="Name,Industry,Description,Phone"
+                      Mode="Edit"/>
+
+    <!-- Display a lightning card with details about the record -->
+    <div class="Record Details">
+        <lightning:card iconName="standard:account" title="{!v.accountRecord.Name}">
+            <div class="slds-p-horizontal--small">
+                <p class="slds-text-heading--small">
+                    <lightning:formattedText title="Industry" value="{!v.accountRecord.Industry}"/>
+                </p>
+                <p class="slds-text-heading--small">
+                    <lightning:formattedText title="Description"
+                                             value="{!v.accountRecord.Description }"/>
+                </p>
+            </div>
+        </lightning:card>
+    </div>
+
+    <br/>
+
+    <div class="Record Details">
+        <lightning:card iconName="action:edit" title="Edit Account">
+            <div class="slds-p-horizontal--small">
+                <lightning:input label="Account Name" aura:Id="AccountName"
+                                 value="{!v.accountRecord.Name}"/>
+                <br/>
+                <lightning:button label="Save Account" variant="brand"
+                                  onclick="{!c.handleSaveRecord}"/>
+            </div>
+        </lightning:card>
+    </div>
+    <!-- Display Lightning Data Service errors, if any -->
+    <aura:if isTrue="{!not(empty(v.recordError))}">
+        <div class="recordError">
+            {!v.recordError}</div>
+    </aura:if>
+</aura:component>

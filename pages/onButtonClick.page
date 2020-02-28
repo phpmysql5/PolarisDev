@@ -1,0 +1,5 @@
+<apex:page controller="button">
+<apex:form >
+<apex:commandButton value="button" action="{!redirect}"/>
+</apex:form>
+</apex:page>

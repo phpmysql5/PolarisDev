@@ -1,0 +1,18 @@
+<aura:component implements="force:appHostable"  controller='APController'>
+    
+     <aura:attribute name="configuration" type="String[]" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+      <aura:if isTrue="{!!empty(v.configuration)}">
+                    <aura:iteration items="{!v.configuration}" var="config" >
+                       
+                          {!config}  <ui:inputCheckbox text="{!config}"  aura:Id="checkbox"/>
+
+                    </aura:iteration>
+     </aura:if>
+    <lightning:button label="Submit" onclick="{!c.onClick }" />
+    
+    
+    
+</aura:component>

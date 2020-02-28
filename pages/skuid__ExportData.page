@@ -1,0 +1,2 @@
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false" controller="skuid.ExportController" 
+    cache="true" contentType="application/octet-stream">{!inputData}</apex:page>

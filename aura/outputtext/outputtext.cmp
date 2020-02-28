@@ -1,0 +1,5 @@
+<aura:component >
+<lightning:input type="checkbox" label="Red" name="red" checked="true"/>
+    <lightning:input type="color"  label="Brown" name="Brown" value="#E12002"/>
+    
+</aura:component>

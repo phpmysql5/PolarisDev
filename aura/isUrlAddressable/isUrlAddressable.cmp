@@ -1,0 +1,9 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction,lightning:hasPageReference,lightning:isUrlAddressable" 
+                access="global" >
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <lightning:navigation aura:id="navigate" />
+    <lightning:button label="Lightning Navigate" onclick="{!c.navigate}"
+                      variant="brand"/>
+    <!-- <lightning:button label="Lightning Navigate" onclick="{!c.navigate}" 
+                      variant="brand" /> -->
+</aura:component>

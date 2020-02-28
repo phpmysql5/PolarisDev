@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <brand>
+        <headerColor>#0070D2</headerColor>
+        <shouldOverrideOrgTheme>false</shouldOverrideOrgTheme>
+    </brand>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <label>ROSTER</label>
+    <navType>Standard</navType>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Account</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Account</pageOrSobjectType>
+        <type>Flexipage</type>
+        <profile>Admin</profile>
+    </profileActionOverrides>
+    <tabs>Lecturer__c</tabs>
+    <tabs>Class__c</tabs>
+    <tabs>Colleagues__c</tabs>
+    <tabs>GitUser__c</tabs>
+    <tabs>Consultant__c</tabs>
+    <tabs>Bot_Appointment__c</tabs>
+    <tabs>Bot_Order__c</tabs>
+    <tabs>series</tabs>
+    <uiType>Lightning</uiType>
+    <utilityBar>ROSTER_UtilityBar</utilityBar>
+</CustomApplication>

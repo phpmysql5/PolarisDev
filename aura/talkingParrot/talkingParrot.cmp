@@ -1,0 +1,4 @@
+<aura:component >
+      
+	 <img src ='{! $Resource.talking}'/>
+</aura:component>

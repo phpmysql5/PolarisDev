@@ -1,0 +1,20 @@
+<aura:component implements="flexipage:availableForAllPageTypes" >
+    <aura:attribute name="options" type="List" default="[
+        { label: 'ApexClass:English', value: 'ApexClass:English' },
+        { label: 'ApexClass:German', value: 'ApexClass:German' },
+        { label: 'ApexTrigger:Spanish', value: 'ApexTrigger:Spanish' },
+        { label: 'ApexTrigger:French', value: 'ApexTrigger:French' },
+        ]"/>
+     
+    <aura:handler name='init' value='{!this}' action='{!c.doInit}'/>
+    
+    
+    <lightning:dualListbox name="languages"  
+                           label= "Select Languages" 
+                           sourceLabel="Available" 
+                           selectedLabel="Selected" 
+                           fieldLevelHelp="This is a dual listbox" 
+                           options="{!v.options}" 
+                           onchange="{! c.handleChange }"/>
+
+</aura:component>

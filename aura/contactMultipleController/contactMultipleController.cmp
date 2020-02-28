@@ -1,0 +1,19 @@
+<aura:component implements="force:appHostable" controller ="contact33" >
+    <aura:handler name ="init" value ="{!this}" action ="{!c.doInit}"/>
+    
+    
+    <aura:attribute name ="contacts" type ="contact[]"></aura:attribute>
+    <aura:attribute name ="contactList" type ="contact[]"></aura:attribute>
+    <aura:attribute name ="totalContacts" type = "Integer"></aura:attribute>
+    <H1 class="slds-page-header">
+        LEADSOURCE
+    <lightning:select name="Source" label="Select the leadsource?" required="false"  onchange="{! c.onChange }">
+      
+        <option value="1">Referral</option>
+        <option value="2">Social Media</option>
+        <option value="3">All</option>
+    </lightning:select>
+    </H1>
+    
+  
+</aura:component>

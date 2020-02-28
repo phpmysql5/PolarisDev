@@ -1,0 +1,111 @@
+<apex:page controller="echosign_dev1.AgreementTemplateBatchController" 
+    title="{!$Label.echosign_dev1__agreement_template_batch_page_title}" 
+    sidebar="{!IF(NOT ISNULL($CurrentPage.parameters.showheadersidebar),$CurrentPage.parameters.showheadersidebar,'true')}" 
+    showHeader="{!IF(NOT ISNULL($CurrentPage.parameters.showheadersidebar),$CurrentPage.parameters.showheadersidebar,'true')}"
+    action="{!init}">
+    
+    <style type="text/css">
+    	@font-face {
+            font-family: AdobeCleanRegular;
+            src: url('{!URLFOR($Resource.echosign_dev1__AdobeFonts,'AdobeClean-Regular.otf')}') format('opentype');
+        }
+                  
+        @font-face {
+            font-family: AdobeCleanBold;
+            src: url('{!URLFOR($Resource.echosign_dev1__AdobeFonts,'AdobeClean-Bold.otf')}') format('opentype');
+        }
+        
+    	.adobePrimaryText {
+			font-size: 14px;
+            font-family: AdobeCleanRegular;
+            color: #4B4B4B;
+            -moz-opacity: 1.0;
+			-khtml-opacity: 1.0;
+			 opacity: 1.0;
+		}
+		
+		.adobePrimaryBoldText {
+			font-size: 14px;
+            font-family: AdobeCleanBold;
+            color: #4B4B4B;
+            -moz-opacity: 1.0;
+			-khtml-opacity: 1.0;
+			 opacity: 1.0;
+		}
+	</style>
+		
+    <apex:form >
+    	<apex:sectionHeader title="{!$Label.echosign_dev1__agreement_template_batch_header}" subtitle="{!$Label.echosign_dev1__agreement_template_batch_subheader}"/>
+
+		<apex:outputPanel >
+			<apex:pageMessages />
+		</apex:outputPanel>
+		
+		<apex:outputPanel id="resultPanel">
+			<apex:outputPanel rendered="{!isResultStep}">
+				<div class="message infoM3" role="alert">
+			        <table border="0" cellpadding="0" cellspacing="0" class="messageTable" style="padding:0px; margin:0px;">
+			            <tbody><tr valign="top">
+			                <td>
+			                    <img alt="INFO" class="msgIcon" src="/s.gif" title="INFO"/>
+			                </td>
+			                <td class="messageCell">
+			                	<div class="messageText">
+			                		<span style="font-size: small;">{!$Label.Bulk_Action_Result_Label} <a style="font-size: 100%; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;" href="/apexpages/setup/listAsyncApexJobs.apexp">{!syncProcessId}</a>. {!$Label.Agreement_Bulk_Action_Result_Label_Two} <a style="font-size: 100%; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px;" href="{!URLFOR($Action.SIGN_Agreement__c.Tab,$ObjectType.SIGN_Agreement__c)}">{!$Label.Bulk_Action_Result_Label_Three}</a> {!$Label.Bulk_Action_Result_Label_Four}</span>
+			                		<br/>
+			                	</div>
+			                </td>
+			            </tr>
+			            <tr>
+			                <td></td>
+			                <td></td>
+			            </tr>
+			        </tbody></table>
+			    </div>
+			</apex:outputPanel>
+		</apex:outputPanel>
+        
+        <apex:outputPanel id="executePanel">
+	        <apex:pageBlock helpTitle="{!$Label.echosign_dev1__batch_agreement_help_title}" helpUrl="https://helpx.adobe.com/sign/help/adobesign_for_salesforce_batch_agreements.html" id="topActionPageBlock" rendered="{!isExecuteStep}">
+	            <apex:pageBlockSection id="aboutSection" collapsible="false" columns="1">
+	            	<apex:outputPanel >
+	            		<h2>{!$Label.echosign_dev1__agreement_template_batch_block_title}</h2>
+	            	</apex:outputPanel>
+	            	<apex:outputPanel styleClass="adobePrimaryText">
+	            		{!$Label.echosign_dev1__agreement_template_batch_description_one}
+	            		<p>{!$Label.echosign_dev1__agreement_template_batch_description_two}</p>
+	            		<p>{!$Label.echosign_dev1__agreement_template_batch_description_three}</p>
+					</apex:outputPanel>
+	            </apex:pageBlockSection>
+	            <apex:pageBlockSection id="settingsSection" collapsible="false" columns="1">
+	            	<apex:pageBlockSectionItem >
+	            		<apex:outputPanel styleClass="adobePrimaryBoldText">{!$Label.echosign_dev1__agreement_template_batch_select_template_label}</apex:outputPanel>
+	            		<apex:selectList value="{!agreementTemplateId}" size="1">
+	                    	<apex:selectOptions value="{!agreementTemplateOptions}"/>
+	                    	<apex:actionSupport event="onchange" action="{!onAgreementTemplateChange}" rerender="agreementTemplateMasterObjectPanel"/>
+	                	</apex:selectList>
+	            	</apex:pageBlockSectionItem>
+	            	<apex:pageBlockSectionItem >
+	            		<apex:outputPanel styleClass="adobePrimaryBoldText">{!$Label.echosign_dev1__agreement_template_batch_master_object_label}</apex:outputPanel>
+	            		<apex:outputPanel id="agreementTemplateMasterObjectPanel">
+	            			<apex:outputText value="{!agreementTemplateMasterObject}"/>
+	            		</apex:outputPanel>
+	            	</apex:pageBlockSectionItem>
+	            	<apex:pageBlockSectionItem >
+	            		<apex:outputPanel styleClass="adobePrimaryBoldText">{!$Label.echosign_dev1__agreement_template_batch_enter_query_label}</apex:outputPanel>
+	            		<apex:inputTextArea rows="5" cols="100" value="{!query}"/>
+	            	</apex:pageBlockSectionItem>
+	            </apex:pageBlockSection>	            
+	            <apex:pageBlockButtons location="bottom" id="blockBottomButtons"> 
+	            	<apex:outputPanel id="topButtons">
+	                	<apex:commandbutton id="topSyncButton" 
+	                		value="{!$Label.echosign_dev1__agreement_templates_batch_submit_button_label}" 
+	                    	action="{!onSubmit}"
+	                    	rerender="executePanel,resultPanel" />
+	                </apex:outputPanel>                  
+	            </apex:pageBlockButtons>
+	            
+			</apex:pageBlock>
+		</apex:outputPanel>
+    </apex:form>
+</apex:page>

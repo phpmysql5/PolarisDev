@@ -1,0 +1,12 @@
+<aura:component controller="TreeAuraController" implements="flexipage:availableForAllPageTypes" access="global">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="items" type="Object"/>
+    <!--Lightning Tree-->
+    <div class="slds-m-around_xx-large">
+        <lightning:tree items="{!v.items}" onselect="{!c.handleSelect}" header="Account and Contacts"/>
+    </div>
+    <!--Lightning Spinner-->
+    <div>
+        <lightning:spinner alternativeText="Processing.." title="Processing.." aura:id="spnr" variant="brand" size="large" />
+    </div>
+</aura:component>

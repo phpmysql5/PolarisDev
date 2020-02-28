@@ -1,0 +1,11 @@
+<aura:component controller="GetData">
+   
+    <aura:handler event="aura:locationChange" action="{!c.locationChange}"/>
+    <aura:attribute name="contacts"  type="Contact[]"/>
+    
+    <aura:iteration items="{!v.contacts}" var="contact">
+        <p>{!contact.Name}</p>
+    </aura:iteration>
+    
+	
+</aura:component>

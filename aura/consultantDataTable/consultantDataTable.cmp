@@ -1,0 +1,14 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" controller ='consultantController'
+                            access="global" >
+	
+    <aura:attribute type="Consultant__c[]" name="consultantList"/>
+    <aura:attribute name="attributes" type="List"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.fetchAccounts}"/>
+    
+    <lightning:datatable data="{! v.consultantList }" 
+                         columns="{! v.attributes }" 
+                         keyField="id"
+                         hideCheckboxColumn="true"/>
+    
+</aura:component>

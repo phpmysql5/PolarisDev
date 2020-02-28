@@ -1,0 +1,22 @@
+<aura:component >
+    <!--Define generic attributes -->
+    
+    <aura:attribute name="attr1"  type="String" />
+    <aura:attribute name="attr2" type="String" />
+    <aura:attribute name="attr3" type="String" />
+    <aura:attribute name="sid"   type="String"/>
+    
+ 
+        		<tr>
+            		<td>{!v.attr1}</td>
+        			<td>{!v.attr2}</td>
+            		<td>{!v.attr3}</td>
+                    
+                    <td> <lightning:button label="View"  onclick="{! c.viewRecord}" /> </td>
+                    <td> <lightning:button label="Edit" onclick="{! c.editRecord}" /></td>
+        		</tr>
+    
+    
+    
+	
+</aura:component>

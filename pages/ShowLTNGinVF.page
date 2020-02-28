@@ -1,0 +1,19 @@
+<apex:page >
+    
+    <apex:includeLightning />
+
+    <div id="lightning" />
+
+    <script>
+        $Lightning.use("c:ReferenceApp", function() {
+          $Lightning.createComponent("c:insertAccounts",
+          { label : "Press Me!" },
+          "lightning",
+          function(cmp) {
+            console.log('Component created, do something cool here');
+
+          });
+        });
+    </script>
+    
+</apex:page>

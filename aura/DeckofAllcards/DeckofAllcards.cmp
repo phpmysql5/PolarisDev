@@ -1,0 +1,18 @@
+<aura:component >
+    <div>
+    <lightning:button label='TalkingParrot' variant='brand'   aura:id='1' onclick='{!c.handleClick}' />
+    <lightning:button label='AngryParrot' variant='neutral' aura:id='2' onclick='{!c.handleClick}' />
+    </div>
+    
+    <div>
+    <div aura:id ='talkingDiv'>
+        <c:talkingParrot />
+    </div>
+    
+    <div aura:id ='angryDiv' class ="slds-hide">
+        <c:angryParrot />
+    </div>
+    </div>
+
+	
+</aura:component>

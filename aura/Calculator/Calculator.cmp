@@ -1,0 +1,31 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes" >
+    <aura:attribute name='num1' type='integer' default='10' ></aura:attribute>
+    <aura:attribute name='num2' type='integer' default='20'></aura:attribute>
+    <aura:attribute name='result' type='double' ></aura:attribute>
+
+    
+    <!--Create 4 lightning buttons to show case arithmetic operations-->
+    <!-- use{c.NameofTheFunction} -->
+    
+    <!--{! v.num1 + v.num2}
+    {! v.num1 - v.num2}
+    {! v.num1 * v.num2}
+    {! v.num1  / v.num2}-->
+    <!--Take user input -->
+    <div class ='myBorder'>
+    <img src ='{! $Resource.calcINAGE}'/>
+    <lightning:input class="myWidth"   name='firstNumber' label='firstNumber' value='{!v.num1}'></lightning:input>
+    <lightning:input class="myWidth"   name='secondNumber' label='secondNumber' value='{!v.num2}'></lightning:input>
+    
+    
+    <H1><b>Result = {!v.result}</b></H1>
+    <lightning:button label='Add'  variant='brand'  iconName='utility:add' onclick="{!c.addition}"/>
+    <lightning:button label='Sub'  variant='destructive' iconName='utility:dash' onclick="{!c.substraction}"/><br/>
+    <lightning:button label='Mult' variant='neutral' iconName='utility:close' onclick='{!c.multiplication}' />
+    <lightning:button label='Div'   variant='success' iconName='utility:insert_tag_field' onclick='{!c.division}'/>
+    <br/>
+   
+    </div>
+    
+	
+</aura:component>

@@ -1,0 +1,52 @@
+<aura:component controller='OpportunityController'  
+                implements="force:appHostable,flexipage:availableForAllPageTypes" extends="c:GenericServerCall">
+
+    
+ 
+    
+    <lightning:spinner variant='brand' size="large" class="slds-hide" aura:id="spin"/>
+    
+    
+    <!--Define Handlers for aura:waiting and aura:doneWaiting system events-->
+    <aura:handler event='aura:waiting' action="{! c.showspin}" />
+    <aura:handler event='aura:donewaiting' action="{! c.hidespin}"/>
+    
+    
+    <aura:attribute name='oppList' type='List'/>
+    
+    <!--<aura:handler name ='init' action = '{!c.getAllops}' value ='{!this}' />-->
+    <lightning:button name='getAllOps' label='getAllOps' variant='brand' onclick='{!c.getAllOps}' />
+    <lightning:button name='getAllWonOps' label='getAllWonOps' variant='brand' onclick='{!c.getAllWonOps}' />
+    <aura:method name="display" action="{!c.displayToast}"/>
+    <!-- Iterate through oppList and display Name,StageName and Amount using aura:iteration-->
+    
+    <table class = "slds-table slds-table--bordered" border ='1px'>
+        <thead>
+            <th>Name</th>
+            <th>StageName</th>
+             <th>Amount</th>
+        </thead>
+        
+        <tbody>
+   			 <aura:iteration items='{!v.oppList}' var='opp'>
+                 
+                 <c:GenericDisplay attr1="{!opp.Name}"
+                                    attr2="{!opp.StageName}"
+                                   attr3="{!opp.Amount}"
+                                   sid="{!opp.Id}"
+                                   />
+                 
+        		
+    		</aura:iteration>
+        </tbody>
+        
+     </table>
+    
+    
+
+    
+    
+    
+    
+	
+</aura:component>

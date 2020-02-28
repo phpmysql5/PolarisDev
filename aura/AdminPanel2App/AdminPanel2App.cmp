@@ -1,0 +1,27 @@
+<aura:component implements="force:appHostable"  controller='APController'>
+    
+     <aura:attribute name="configuration" type="configuration__c" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    
+    {!$Label.c.Configure_Settings}
+    
+    <br/>
+    
+      <aura:if isTrue="{!!empty(v.configuration)}">
+                    <aura:iteration items="{!v.configuration}" var="config" >
+                       
+                            ISBOY__c<ui:inputCheckbox value="{!config.ISBOY__c}" text="{!config.ISGirl__c}"  aura:Id="checkbox"/>
+                            ISGirl__c<ui:inputCheckbox value="{!config.ISGirl__c}" text="{!config.ISGirl__c}"  aura:Id="checkbox"/>
+   
+                    </aura:iteration>
+          <aura:set attribute="else">
+    No records to be shown 
+    </aura:set>
+     </aura:if>
+    <lightning:button label="Submit" onclick="{!c.onClick }"  />
+    
+    
+    
+</aura:component>

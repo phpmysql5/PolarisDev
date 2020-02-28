@@ -1,0 +1,32 @@
+<template>
+        <style>
+            table tr td{
+                padding: 10px;
+                border: 1px solid black;
+            }
+        </style>
+        <div style="background:white;padding:20px;">
+            <table>
+                <tr>
+                    <td>
+                        <lightning-input type="text" label="Account ID"></lightning-input>
+                    </td>
+                    <td>
+                        <lightning-button label="Get Details" onclick={fetchAccount}></lightning-button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Demo With Property</td>
+                    <td>
+                        <c-wire-service-with-property accid={accountid}></c-wire-service-with-property>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Demo With Function</td>  
+                    <td>
+                        <c-wire-service-with-function accid={accountid}></c-wire-service-with-function>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </template>

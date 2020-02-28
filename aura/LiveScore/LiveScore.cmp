@@ -1,0 +1,155 @@
+<aura:component  implements="force:appHostable" >
+
+<aura:handler event="aura:waiting" action="{!c.showSpinner}"/>
+
+<aura:handler event="aura:doneWaiting" action="{!c.hideSpinner}"/>
+
+<aura:attribute name="cricketWrapper" type="CricketScoreWrapper.xmlData[]"/>
+
+<aura:attribute name="visible" type="Boolean" default="True" />
+
+<aura:attribute name="backbuttonvisible" type="Boolean" default="false" />
+
+<aura:attribute name="scoreTable" type="DisplayWrapperClass"/>
+
+<br/><br/><hr /><br/><center><ui:outputText class="scoreHeadLine" value="Cricforce"/></center> <br/><hr /><br/>
+
+<aura:renderIf isTrue="{!v.visible}">
+
+<center> <ui:button aura:id="button1" press="{!c.getListOfMatches}" class="headline" label="Get The List Of OnGoing Matches" />
+
+</center>
+
+</aura:renderIf>
+
+<br/>
+
+<div><center><ui:spinner aura:id="spinner"></ui:spinner></center></div>
+
+<aura:renderIf isTrue="{!v.backbuttonvisible}">
+
+<ui:button press="{!c.showMainPage}" class="headline" label="Home" /> <br/><br/>
+
+</aura:renderIf>
+
+<div>
+
+<aura:iteration items="{!v.cricketWrapper}" var="cric1">
+
+<center>
+
+<ui:button press="{!c.ShowScore}" label="{!cric1.matchScore}" class="headline"/>
+
+</center><br></br></aura:iteration>
+
+</div>
+
+<div align="left">
+
+<aura:iteration items="{!v.scoreTable}" var="cric">
+
+<br/><br/>
+
+<center> <img src="{!cric.team1Image}" alt="Image Not Available" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<ui:outputText class="teamTitle" value="VS"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img src="{!cric.team2Image}" alt="Image Not Available" />
+
+</center>
+
+<aura:renderIf isTrue="{!cric.showImages != null}">
+
+<div> <hr/> <hr/>
+
+<center> </center> <br /><br/><br/>
+
+<center> <b> Batting </b> <br/><br/><br/><table align="center">
+
+<tr>
+
+<td cellpadding="0" cellspacing="0"> <img src="{!cric.striker1Image}" alt="Image Not Available" />
+
+<br /><br /> <ui:outputText value="{!cric.striker1Name}"/> &nbsp;&nbsp; <ui:outputText value="{!cric.striker1runs}"/>* (<ui:outputText value="{!cric.striker1ballfaced}"/>)
+
+</td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+<td cellpadding="0" cellspacing="0"> <img src="{!cric.striker2Image}" alt="Image Not Available" />
+
+<br /><br /> <ui:outputText value="{!cric.striker2Name}"/> &nbsp;&nbsp; <ui:outputText value="{!cric.striker2runs}"/>* (<ui:outputText value="{!cric.striker2ballfaced}"/>)
+
+</td>
+
+</tr>
+
+</table>
+
+</center> <br /> <br />
+
+<center>
+
+<table>
+
+<tr>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+<td cellpadding="0" cellspacing="0">
+
+<b> &nbsp;&nbsp;&nbsp;&nbsp;Current Bowler</b> <br/>
+
+<img src="{!cric.bowlerImage}" alt="Image Not Available" />
+
+
+
+<br/><br/> <ui:outputText value="{!cric.bowlerName}"/>&nbsp;&nbsp;( <ui:outputText value="{!cric.bowlerOvers}"/>&nbsp;-&nbsp;<ui:outputText value="{!cric.bowlerMaiden}"/>&nbsp;-&nbsp;<ui:outputText value="{!cric.bowlerConceeded}"/>&nbsp;-&nbsp;<ui:outputText value="{!cric.bowlerWickets}"/> )
+
+</td>
+
+</tr>
+
+</table> </center>
+
+<hr/> <hr/> </div></aura:renderIf>
+
+<br/><br/>
+
+<center> <ui:outputText class="scoreHeadLine" value="{!cric.currentSummary}"/> </center>
+
+<br></br>
+
+<br/>
+
+<center> <ui:outputText value="{!cric.matchStatus}" class="scoresubLine"/>
+
+</center><br></br>
+
+<br/>
+
+<b> <ui:outputText class="headline" value="Click To Refresh "/> </b> <ui:button press="{!c.ShowScore}" label="{!cric.matchScore}"/>
+
+<br/><br/>
+
+<b> <ui:outputText value="Venue : "/> </b> <ui:outputText value="{!cric.hostCountry}"/>
+
+<br/><br/><br/>
+
+<b><ui:outputText value="Match : "/> </b> <ui:outputText value="{!cric.matchDescription}"/>
+
+<br/><br/><br/>
+
+<b> <ui:outputText value="Umpires : "/> </b> <ui:outputText value="{!cric.matchOfficials}"/>
+
+<br/><br/><br/>
+
+<b> <ui:outputText value="Timings : "/> </b> <ui:outputText value="{!cric.matchTimings}"/>
+
+<br/><br/><br/>
+
+<b> <ui:outputText value="{!cric.teamAName+'Team Players: '}"/> </b><br/> <br/><br/> <ui:outputText value="{!cric.teamAPlayers}"/>
+
+<br/><br/>
+
+<b> <ui:outputText value="{!cric.teamBName+'Team Players: '}"/> </b> <br/> <br/><br/> <ui:outputText value="{!cric.teamBPlayers}"/>
+
+</aura:iteration>
+
+</div>
+
+</aura:component>

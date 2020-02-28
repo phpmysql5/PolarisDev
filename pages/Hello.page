@@ -1,0 +1,9 @@
+<apex:page sidebar="false" controller="accPickNamesDisplayClass">
+	<apex:form >
+		<apex:selectList multiselect="false" size="1">
+			
+            <apex:selectOptions value="{!accNames}">sdsd</apex:selectOptions>
+            
+		</apex:selectList>
+	</apex:form>
+</apex:page>

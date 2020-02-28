@@ -1,0 +1,8 @@
+<aura:component >
+    <!--1.Register with the event name attribute
+plays imp role-->
+    
+    <aura:registerEvent name="signalJump" type="c:SignalJumpEvent"/>
+    <lightning:button label="Notify Signal Jump" onclick="{!c.notifySignalJump}"/>
+	
+</aura:component>

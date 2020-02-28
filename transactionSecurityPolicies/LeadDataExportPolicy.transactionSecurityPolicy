@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TransactionSecurityPolicy xmlns="http://soap.sforce.com/2006/04/metadata">
+    <action>
+        <block>false</block>
+        <endSession>false</endSession>
+        <freezeUser>false</freezeUser>
+        <notifications>
+            <inApp>true</inApp>
+            <sendEmail>true</sendEmail>
+            <user>kshet@gmail.com</user>
+        </notifications>
+        <twoFactorAuthentication>false</twoFactorAuthentication>
+    </action>
+    <active>false</active>
+    <apexClass>DataLoaderLeadExportCondition</apexClass>
+    <developerName>LeadDataExportPolicy</developerName>
+    <eventType>DataExport</eventType>
+    <executionUser>kshet@gmail.com</executionUser>
+    <masterLabel>Lead Data Export Policy</masterLabel>
+    <resourceName>Lead</resourceName>
+    <type>CustomApexPolicy</type>
+</TransactionSecurityPolicy>

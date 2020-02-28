@@ -1,0 +1,53 @@
+<aura:component controller="TaskEventController" >
+    <!--<ltng:require styles="{!$Resource.SLDS203 + '/assets/styles/lightning-design-system-ltng.css'}"/>-->
+    <aura:attribute name='taskList' type='TaskEventWrapper[]'></aura:attribute> 
+    <aura:attribute name='eventList' type='TaskEventWrapper[]'></aura:attribute> 
+
+    <aura:attribute name="status" type="String" default="open"/>
+    <aura:handler name="change" value="{!v.status}" action="{!c.handleChange}"/>
+
+    <lightning:select aura:id="select" name="select" label="Select any standard object " value="{!v.status}">
+        <option value="account">ACCOUNT</option>
+        <option value="opportunity">OPPORTUNITY</option>
+        <option value="contact">CONTACT</option>
+    </lightning:select>
+
+    
+    <div class="demo-only slds-size_1-of-2">
+  <div class="slds-form-element">
+    <label class="slds-checkbox_toggle slds-grid">
+      <span class="slds-form-element__label slds-m-bottom_none">Toggle Label</span>
+       
+      <input type="checkbox" aura:id ="task" disabled=""  name="task" aria-describedby="toggle-desc" value="task" action="{!c.handleChange}"/>
+      <span id="toggle-desc" class="slds-checkbox_faux_container" aria-live="assertive">
+        <span class="slds-checkbox_faux"></span>
+        <span class="slds-checkbox_on">Enabled</span>
+        <span class="slds-checkbox_off">Disabled</span>
+      </span>
+    </label>
+  </div>
+</div>
+
+    <aura:iteration items='{!v.taskList}' var='wrapperObj'>
+        <H1>TASKS</H1>
+        <aura:iteration items='{!wrapperObj.taskList}' var='task'>
+        <br/>{!task.Id}
+    	</aura:iteration>
+        
+        <H1>EVENTS</H1>
+        <aura:iteration items='{!wrapperObj.eventList}' var='event'>
+        <br/>{!event.Id}
+    	</aura:iteration>
+    </aura:iteration>
+    <br/>
+
+     
+    
+    <!--<H1>EVENTS</H1>
+    <aura:iteration items='{!v.eventList}' var='event'>
+        <aura:iteration items='{!event.eventList}' var='event2'>
+       <br/>{!event2.Id}
+    </aura:iteration>
+    </aura:iteration>-->
+
+</aura:component>

@@ -1,0 +1,7 @@
+<aura:component >
+    <aura:attribute name="karthikArea" type="string" default="Nandivli Road"/>
+    <ui:inputText label="write karthiks area "
+                  value="!v.karthikArea"  updateOn="Click"></ui:inputText>
+    <ui:outputTextArea value="!v.karthikArea" />
+	
+</aura:component>

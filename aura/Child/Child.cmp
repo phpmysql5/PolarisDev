@@ -1,0 +1,12 @@
+<aura:component  >
+	 
+    
+    <aura:attribute type ='string' name ='Parent2'></aura:attribute>
+    <aura:attribute type ='Integer' name ='numEvents' ></aura:attribute>
+  <aura:handler name='appEvent'   event="c:testEvent" action="{!c. handleComponentEvent}"/>
+     <c:lightningAvatar></c:lightningAvatar> 
+     {!v.Parent2} --- Aruntest
+   
+    <p>Number of eventsss: {!v.numEvents}</p>
+
+</aura:component>

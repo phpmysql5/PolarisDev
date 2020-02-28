@@ -1,0 +1,7 @@
+<apex:page standardcontroller="contact" >
+  <!-- Begin Default Content REMOVE THIS -->
+{!contact.AssistantName}
+
+  <!-- End Default Content REMOVE THIS -->
+  <a href="tel:{!contact.AssistantPhone}"></a>
+</apex:page>

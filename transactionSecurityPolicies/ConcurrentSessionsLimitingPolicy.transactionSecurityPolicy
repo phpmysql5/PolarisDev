@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TransactionSecurityPolicy xmlns="http://soap.sforce.com/2006/04/metadata">
+    <action>
+        <block>false</block>
+        <endSession>true</endSession>
+        <freezeUser>false</freezeUser>
+        <notifications>
+            <inApp>false</inApp>
+            <sendEmail>false</sendEmail>
+            <user>kshet@gmail.com</user>
+        </notifications>
+        <twoFactorAuthentication>false</twoFactorAuthentication>
+    </action>
+    <active>false</active>
+    <apexClass>ConcurrentSessionsPolicyCondition</apexClass>
+    <developerName>ConcurrentSessionsLimitingPolicy</developerName>
+    <eventType>Login</eventType>
+    <executionUser>kshet@gmail.com</executionUser>
+    <masterLabel>Concurrent User Session Limit Policy</masterLabel>
+    <resourceName>LoginHistory</resourceName>
+    <type>CustomApexPolicy</type>
+</TransactionSecurityPolicy>

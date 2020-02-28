@@ -1,0 +1,16 @@
+<aura:component controller="GetData">
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"></aura:handler>
+    <aura:attribute name="acco" type="Account[]"/>
+    
+    <aura:iteration items="{!v.acco}" var="acc">
+			
+        	<div>
+            <p><a href="{! '#account/' + acc.Id }">{!acc.Name}</a></p>
+        	<p>{!acc.phone}</p>
+        	<p>{!acc.AccountNumber}</p> 
+    		</div>
+
+    </aura:iteration>
+
+</aura:component>

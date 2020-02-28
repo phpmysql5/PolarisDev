@@ -1,0 +1,15 @@
+<aura:component >
+    
+
+	
+    <!--aura:handler name="init" value="{!this}" action="{!c.doInit}" /-->
+     <aura:attribute type ='string' name ='Parent2'></aura:attribute>
+    <aura:attribute type ='string' name ='test'></aura:attribute>
+    <aura:attribute type ='Integer' name ='numEvents' default="0"></aura:attribute>
+     {!v.body}
+     <aura:handler name='appEvent'   event="c:testEvent" action="{!c.handleApplicationEvent}"/>
+    <!--c:lightningAvatar></c:lightningAvatar-->
+Here is the parentwhich is   {!v.Parent2} ---  {!v.test}
+    <p>Number of events: {!v.numEvents}</p>
+    
+</aura:component>
