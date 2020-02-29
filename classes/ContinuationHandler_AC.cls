@@ -17,6 +17,8 @@ public class ContinuationHandler_AC {
     public static  Object startRequestURL() {
         Continuation con = new Continuation(90);
         con.continuationMethod='processResponse';
+        //con.state = 'ccccc'; 
+        //
         //karthik shettyan 
         //con.state='Continuation State';
         System.debug(con.continuationMethod);
@@ -26,7 +28,7 @@ public class ContinuationHandler_AC {
         
         req1.setMethod('GET');
         req1.setEndpoint(LONG_RUNNING_SERVICE_URL_1);
-        requestLabel = con.addHttpRequest(req1);
+        con.state = con.addHttpRequest(req1);
         System.debug(String.valueof(con.getRequests().get(requestLabel) ));
         
         //HttpRequest req2 = new HttpRequest();
@@ -44,27 +46,30 @@ public class ContinuationHandler_AC {
     
 
     @AuraEnabled(cacheable=true)
-    public static Object processResponse() {
-        System.debug(' in processResponse');
+    public static Object processResponse(Object state) {
+        System.debug(' in processResponse'+ state);
        // CalloutWrapper.ResponseWrapper ResponseWrapperIns = new CalloutWrapper.ResponseWrapper();
-        
+         
         Continuation chainedContinuation = new Continuation(10);
-         System.debug(requestLabel);
-        HttpResponse response1 = Continuation.getResponse(requestLabel);
+         System.debug((string)state+'state 1');
+        
+        HttpResponse response1 = Continuation.getResponse((string)state);
         System.debug(response1 +'karthik');
 
          if(response1.getBody() != null && response1.getStatusCode() == 200){
             System.debug(' in processResponse');
-            ResponseWrapperIns.candidateWrapperList = (List<CalloutWrapper.CandidateWrapper>)json.deserialize(response1.getBody(),List<CalloutWrapper.CandidateWrapper>.class);
-            System.debug(ResponseWrapperIns.candidateWrapperList);
+            //ResponseWrapperIns.candidateWrapperList = (List<CalloutWrapper.CandidateWrapper>)json.deserialize(response1.getBody(),List<CalloutWrapper.CandidateWrapper>.class);
+            //System.debug(ResponseWrapperIns.candidateWrapperList);
             
             chainedContinuation.continuationMethod = 'processChainedResponse';
+           
 
             HttpRequest req = new HttpRequest();
             req.setMethod('GET');
 
-            req.setEndPoint(LONG_RUNNING_SERVICE_URL_2);
-            requestLabel2 = chainedContinuation.addHttpRequest(req);        
+            req.setEndPoint('https://raw.githubusercontent.com/parthiban019/samplejson/master/customer.json');
+            requestLabel2 = chainedContinuation.addHttpRequest(req);  
+            chainedContinuation.state = requestLabel2;
         }
 		
         return chainedContinuation;
@@ -84,18 +89,21 @@ public class ContinuationHandler_AC {
     
     
     @AuraEnabled(cacheable=true)
-    public static Object processChainedResponse() {
-    
-        HttpResponse response = Continuation.getResponse(requestLabel2);
+    public static Object processChainedResponse(Object state) {
+        
+        System.debug('processChainedResponse');
+        System.debug((String)state+'State 2');
+        HttpResponse response = Continuation.getResponse((String)state);
         Continuation chained2Obj = new Continuation(10);
         if(response.getBody() != null && response.getStatusCode() == 200){
             System.debug(' in processChainedResponse');
-            ResponseWrapperIns.customerWrapperList = (List<CalloutWrapper.CustomerWrapper>)json.deserialize(response.getBody(),List<CalloutWrapper.CustomerWrapper>.class);
-            chained2Obj.continuationMethod = 'getprocessChained2Response';
+            //ResponseWrapperIns.customerWrapperList = (List<CalloutWrapper.CustomerWrapper>)json.deserialize(response.getBody(),List<CalloutWrapper.CustomerWrapper>.class);
+            chained2Obj.continuationMethod = 'processChained2Response';
             HttpRequest req = new HttpRequest();
             req.setMethod('GET');
             req.setEndPoint(LONG_RUNNING_SERVICE_URL_3);
-            requestLabel3 = chained2Obj.addHttpRequest(req);        
+            requestLabel3 = chained2Obj.addHttpRequest(req);
+            chained2Obj.state = requestLabel3;
         }
 
         return chained2Obj;
@@ -107,11 +115,12 @@ public class ContinuationHandler_AC {
 
    
     @AuraEnabled(cacheable=true)
-    public static Object getprocessChained2Response() {
-		System.debug(' in getprocessChained2Response');
-        HttpResponse response = Continuation.getResponse(requestLabel3);
+    public static Object processChained2Response(Object state) {
+		System.debug(' in processChained2Response');
+        System.debug((String)state+'State 3');
+        HttpResponse response = Continuation.getResponse((String)state);
         if(response.getBody() != null && response.getStatusCode() == 200){
-            ResponseWrapperIns.studentWrapperList = (List<CalloutWrapper.StudentWrapper>)json.deserialize(response.getBody(),List<CalloutWrapper.CustomerWrapper>.class);     
+            //ResponseWrapperIns.studentWrapperList = (List<CalloutWrapper.StudentWrapper>)json.deserialize(response.getBody(),List<CalloutWrapper.CustomerWrapper>.class);     
         }
 
         return json.serialize(ResponseWrapperIns);
