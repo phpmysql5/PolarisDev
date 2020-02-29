@@ -1,8 +1,10 @@
-public class CalloutWrapper{
+public class CalloutWrapper{  
     public class CandidateWrapper {
         public String Name{get;set;}
         public String Country{get;set;}
+        //rfrfr
     }
+    
     
     public class CustomerWrapper {
         public String Name{get;set;}
